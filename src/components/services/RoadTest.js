@@ -56,6 +56,7 @@ export default function RoadTest({ setChild }) {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = form_steps;
+    const [formSubmittedCorrectly, setFormSubmittedCorrectly] = React.useState(false)
 
     const handleNext = () => {
         if (activeStep === steps.length - 1) {
@@ -99,8 +100,12 @@ export default function RoadTest({ setChild }) {
         var condition = await Email(emailForm)
         if(condition) { 
             alert("Form successfully sent!")
+            setFormSubmittedCorrectly(true)
         } else {
-            alert("Error Code during Lambda Fetch " + condition)
+            alert("Error Submitting Registration. Please try again!")
+            setFormSubmittedCorrectly(false)
+            setActiveStep(steps.length - 1)
+            return
         }
     }
 
@@ -239,7 +244,7 @@ export default function RoadTest({ setChild }) {
                             </Step>
                         ))}
                     </Stepper>
-                    {activeStep === steps.length && (
+                    {formSubmittedCorrectly && (
                         <Paper square elevation={0} className={classes.resetContainer}>
                             <Typography>Thank you for your registration. Someone will reach out to you via phone or email within the next 24 hours.</Typography>
                         </Paper>

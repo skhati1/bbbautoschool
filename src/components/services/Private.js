@@ -13,7 +13,7 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-
+import DropDown from '../forms/Dropdown';
 import Datepicker from '../forms/Datepicker'
 import TimePicker from '../forms/TimePicker'
 import PhoneNumberTextBox from '../forms/PhoneNumberTextBox'
@@ -25,7 +25,7 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 import { VIEW } from '../Constants';
 import Email from '../helpers/Emailer';
 
-const form_steps = ['Student Information', 'Road Test Details', 'Summary'];
+const form_steps = ['Student Information', 'Driver Details', 'Package Summary'];
 
 
 const useStyles = makeStyles(theme => ({
@@ -52,10 +52,20 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+const privatePackageOptions = {
+  1: "$50.00",
+  2: "$100.00",
+  3: "$150.00",
+  4: "$200.00",
+  5: "$250.00",
+  6: "$270.00"
+}
+
 export default function Private({ setChild }) {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = form_steps;
+    const [formSubmittedCorrectly, setFormSubmittedCorrectly] = React.useState(false)
 
     const handleNext = () => {
         if (activeStep === steps.length - 1) {
@@ -87,20 +97,25 @@ export default function Private({ setChild }) {
             "Zip Code": zipCode,
             "Student Email": studentEmail,
             "Student Cell Phone": studentCellPhone,
+            "Home Phone": homePhone,
             "Best Time to Call": bestTimeToCall,
             "Learner's Permit": learnersPermit,
-            "Date of Birth": dob.toString(),
-            "Road Test Date": roadTestDate,
-            "Road Test Time": roadTestTime,
-            "Road Test Location": roadTestLocation,
+            "Date of Birth": dob,
+            "Starting Date": startingDate,
+            "Comments": comments,
+            "Package": privatePackage,
             "Agree With Price": agreeWithPrice,
             "Agree With Terms": agreeWithTerms
         }
         var condition = await Email(emailForm)
         if(condition) { 
             alert("Form successfully sent!")
+            setFormSubmittedCorrectly(true)
         } else {
-            alert("Error Code during Lambda Fetch " + condition)
+            alert("Error Submitting Registration. Please try again!")
+            setFormSubmittedCorrectly(false)
+            setActiveStep(steps.length - 1)
+            return
         }
     }
 
@@ -111,12 +126,13 @@ export default function Private({ setChild }) {
     const [zipCode, setZipCode] = useState('')
     const [studentEmail, setStudentEmail] = useState('')
     const [studentCellPhone, setStudentCellPhone] = useState('')
+    const [homePhone, setHomePhone] = useState('')
     const [bestTimeToCall, setBestTimeToCall] = useState('')
     const [learnersPermit, setLearnersPermit] = useState('')
     const [dob, setDob] = useState('')
-    const [roadTestDate, setRoadTestDate] = useState('')
-    const [roadTestTime, setRoadTestTime] = useState('')
-    const [roadTestLocation, setRoadTestLocation] = useState('')
+    const [startingDate, setStartingDate] = useState('')
+    const [comments, setComments] = useState('')
+    const [privatePackage, setPrivatePackage] = useState('')
     const [agreeWithPrice, setAgreeWithPrice] = useState(false)
     const [agreeWithTerms, setAgreeWithTerms] = useState(false)
 
@@ -125,7 +141,7 @@ export default function Private({ setChild }) {
         <DialogTitle className="text-center">Private Lesson Registration</DialogTitle>
 
         <DialogContent>
-            <div className="text-center">Please use the following form to register for our Road Test Sponsorship!</div>
+            <div className="text-center">Please use the following form to register for our Private Lessons!</div>
 
             <div className="container mx-auto">
                 <div className={classes.root}>
@@ -139,7 +155,7 @@ export default function Private({ setChild }) {
                                             switch (index) {
                                                 case 0:
                                                     return (<div className={classes.root}>
-                                                        <Textbox required fullWidth={true} value={studentFirstName} id='studentFirstName' label='Student First Name' onChange={(val) => setStudentFirstName(val)} />
+                                                        <Textbox required value={studentFirstName} id='studentFirstName' label='Student First Name' onChange={(val) => setStudentFirstName(val)} />
 
                                                         <Textbox required value={studentLastName} id='studentLastName' label='Student Last Name' onChange={(val) => setStudentLastName(val)} />
 
@@ -153,24 +169,24 @@ export default function Private({ setChild }) {
 
                                                         <Textbox required value={studentEmail} id='studentEmail' label='Student Email' onChange={(val) => setStudentEmail(val)} />
 
-                                                        <PhoneNumberTextBox value={studentCellPhone} id='studentCellPhone' label='Student Cell Phone' onChange={(val) => setStudentCellPhone(val)} />
+                                                        <PhoneNumberTextBox required value={studentCellPhone} id='studentCellPhone' label='Student Cell Phone' onChange={(val) => setStudentCellPhone(val)} />
                                                         
-                                                        <Datepicker value={dob} id='dob' label='Road Test Date' onChange={(val) => setDob(val)} />
+                                                        <PhoneNumberTextBox value={homePhone} id='homePhone' label='Home Phone' onChange={(val) => setHomePhone(val)} />
+
+                                                        <Datepicker required value={dob} id='dob' label='Date of Birth' onChange={(val) => setDob(val)} />
                                                         
-                                                        <Textbox value={bestTimeToCall} id='bestTimeToCall' label='Best Time to Call' onChange={(val) => setBestTimeToCall(val)} />
 
                                                     </div>
                                                     );
                                                 case 1:
                                                     return (<div>
+                                                        <Textbox value={bestTimeToCall} id='bestTimeToCall' label='Best Time to Call' onChange={(val) => setBestTimeToCall(val)} />
+
                                                         <Textbox required value={learnersPermit} id='learnersPermit' label="Learner's Permit Number" onChange={(val) => setLearnersPermit(val)} fullWidth={true} />
 
-                                                        <Datepicker required label='Road Test Date' value={roadTestDate} id='roadTestDate' onChange={(val) => setRoadTestDate(val)} />
+                                                        <Datepicker label='Starting Date' value={startingDate} id='startingDate' onChange={(val) => setStartingDate(val)} />
                                                         
-                                                        <TimePicker value={roadTestTime} label='Road Test Time' id='roadTestTime' onChange={(val) => setRoadTestTime(val)} />
-                                                        <br />
-
-                                                        <Textbox value={roadTestLocation} id='roadTestLocation' label='Road Test Location' onChange={(val) => setRoadTestLocation(val)} />
+                                                        <Textbox value={comments} id='comments' label='Comments' onChange={(val) => setComments(val)} />
 
 
 
@@ -181,7 +197,7 @@ export default function Private({ setChild }) {
                                                     return (<div>
                                                         <Alert severity="info">
                                                             <AlertTitle>Selected Package</AlertTitle>
-                                                            Road Test Sponsorship - $120.00
+                                                            <DropDown required options={privatePackageOptions} value={privatePackage} id='streetAddress' label='Package' onChange={(val) => setPrivatePackage(val)}></DropDown>
                                                         </Alert>
                                                         <br />
                                                         <div>
@@ -239,7 +255,7 @@ export default function Private({ setChild }) {
                             </Step>
                         ))}
                     </Stepper>
-                    {activeStep === steps.length && (
+                    {formSubmittedCorrectly && (
                         <Paper square elevation={0} className={classes.resetContainer}>
                             <Typography>Thank you for your registration. Someone will reach out to you via phone or email within the next 24 hours.</Typography>
                         </Paper>
