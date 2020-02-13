@@ -6,10 +6,14 @@ function textBoxChanged(e, props) {
 }
 
 export default function TimePicker(props) {
+    var customLabel = props.label
+    if (props.required) {
+        customLabel += " *"
+    }
     return (
         <TextField
             id={props.id}
-            label={props.label}
+            label={customLabel}
             type="time"
             style={{ margin: 8 }}
             variant="outlined"

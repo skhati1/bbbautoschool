@@ -20,11 +20,15 @@ function textBoxChanged(e, props) {
 }
 
 export default function PhoneNumberTextBox(props) {
+    var customLabel = props.label
+    if (props.required) {
+        customLabel += " *"
+    }
     return <TextField
         value={props.value}
         onChange={(e) => textBoxChanged(e, props)}
         id={props.id}
-        label={props.label}
+        label={customLabel}
         style={{ margin: 8 }}
         variant="outlined"
         fullWidth

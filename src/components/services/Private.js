@@ -2,129 +2,256 @@ import React, { useState } from 'react';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import Textbox from '../forms/Textbox';
 
-import { VIEW } from '../Constants';
+import Checkbox from '@material-ui/core/Checkbox';
+import { makeStyles } from '@material-ui/core/styles';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+import StepContent from '@material-ui/core/StepContent';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
-function formSubmitted(setChild){
-  setChild(false, VIEW.NONE)
-}
+import Datepicker from '../forms/Datepicker'
+import TimePicker from '../forms/TimePicker'
+import PhoneNumberTextBox from '../forms/PhoneNumberTextBox'
+
+import Popover from '@material-ui/core/Popover';
+
+import { Alert, AlertTitle } from '@material-ui/lab';
+
+import { VIEW } from '../Constants';
+import Email from '../helpers/Emailer';
+
+const form_steps = ['Student Information', 'Road Test Details', 'Summary'];
+
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        width: '100%',
+    },
+    button: {
+        marginTop: theme.spacing(1),
+        marginRight: theme.spacing(1),
+    },
+    actionsContainer: {
+        marginBottom: theme.spacing(2),
+    },
+    resetContainer: {
+        padding: theme.spacing(3),
+    },
+    typography: {
+        padding: theme.spacing(2),
+    },
+    textField: {
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        width: 200,
+    },
+}));
 
 export default function Private({ setChild }) {
-  console.log({ setChild })
+    const classes = useStyles();
+    const [activeStep, setActiveStep] = React.useState(0);
+    const steps = form_steps;
 
-  const [studentFirstName, setStudentFirstName] = useState('')
-  const [studentLastName, setStudentLastName] = useState('')
-  const [streetAddress, setStreetAddress] = useState('')
-  const [city, setCity] = useState('')
-  const [zipCode, setZipCode] = useState('')
-  const [studentEmail, setStudentEmail] = useState('')
-  const [homePhone, setHomePhone] = useState('')
-  const [studentCellPhone, setStudentCellPhone] = useState('')
-  const [bestTimeToCall, setBestTimeToCall] = useState('')
-  const [learnersPermit, setLearnersPermit] = useState('')
-  const [dob, setDob] = useState('')
-  const [startingDate, setStartingDate] = useState('')
-  const [comments, setComments] = useState('')
+    const handleNext = () => {
+        if (activeStep === steps.length - 1) {
+            handleSubmit(setChild)
+        }
+        setActiveStep(activeStep => activeStep + 1);
 
-  return <div>
-    <DialogTitle>Private Lesson Registration</DialogTitle>
+    };
+    const handleBack = () => { setActiveStep(activeStep => activeStep - 1); };
 
-    <DialogContent>
-      <div>Please use the following form to register for our Private Lessons!</div>
-      <br />
-      <form>
-        <Textbox value={studentFirstName}
-          id='studentFirstName'
-          label='Student First Name'
-          onChange={(val) => setStudentFirstName(val)} />
+    const [anchorEl, setAnchorEl] = useState(null);
 
-        <Textbox value={studentLastName}
-          id='studentLastName'
-          label='Student Last Name'
-          onChange={(val) => setStudentLastName(val)} />
+    const handleClick = event => {
+        setAnchorEl(event.currentTarget);
+    };
 
-        <br /><br />
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
 
-        <Textbox value={streetAddress}
-          id='streetAddress'
-          label='Street Address'
-          onChange={(val) => setStreetAddress(val)}
-          fullWidth={true} />
+    const handleSubmit = async () => {
+        var emailForm = {
+            "First Name": studentFirstName,
+            "Last Name": studentLastName,
+            "Street Address": streetAddress,
+            "City": city,
+            "Zip Code": zipCode,
+            "Student Email": studentEmail,
+            "Student Cell Phone": studentCellPhone,
+            "Best Time to Call": bestTimeToCall,
+            "Learner's Permit": learnersPermit,
+            "Date of Birth": dob.toString(),
+            "Road Test Date": roadTestDate,
+            "Road Test Time": roadTestTime,
+            "Road Test Location": roadTestLocation,
+            "Agree With Price": agreeWithPrice,
+            "Agree With Terms": agreeWithTerms
+        }
+        var condition = await Email(emailForm)
+        if(condition) { 
+            alert("Form successfully sent!")
+        } else {
+            alert("Error Code during Lambda Fetch " + condition)
+        }
+    }
 
-        <Textbox value={city}
-          id='city'
-          label='City'
-          onChange={(val) => setCity(val)} />
-
-        <Textbox value={zipCode}
-          id='zipCode'
-          label='Zip Code'
-          onChange={(val) => setZipCode(val)} />
-
-        <br /><br />
-
-        <Textbox value={studentEmail}
-          id='studentEmail'
-          label='Student Email'
-          onChange={(val) => setStudentEmail(val)} />
-
-        <Textbox value={dob}
-          id='dob'
-          label='Date Of Birth'
-          onChange={(val) => setDob(val)} />
-
-
-        <Textbox value={studentCellPhone}
-          id='studentCellPhone'
-          label='Student Cell Phone'
-          onChange={(val) => setStudentCellPhone(val)} />
+    const [studentFirstName, setStudentFirstName] = useState('')
+    const [studentLastName, setStudentLastName] = useState('')
+    const [streetAddress, setStreetAddress] = useState('')
+    const [city, setCity] = useState('')
+    const [zipCode, setZipCode] = useState('')
+    const [studentEmail, setStudentEmail] = useState('')
+    const [studentCellPhone, setStudentCellPhone] = useState('')
+    const [bestTimeToCall, setBestTimeToCall] = useState('')
+    const [learnersPermit, setLearnersPermit] = useState('')
+    const [dob, setDob] = useState('')
+    const [roadTestDate, setRoadTestDate] = useState('')
+    const [roadTestTime, setRoadTestTime] = useState('')
+    const [roadTestLocation, setRoadTestLocation] = useState('')
+    const [agreeWithPrice, setAgreeWithPrice] = useState(false)
+    const [agreeWithTerms, setAgreeWithTerms] = useState(false)
 
 
-        <Textbox value={homePhone}
-          id='homePhone'
-          label='Home Phone'
-          onChange={(val) => setHomePhone(val)} />
+    return <div>
+        <DialogTitle className="text-center">Private Lesson Registration</DialogTitle>
 
-          <br /><br />
+        <DialogContent>
+            <div className="text-center">Please use the following form to register for our Road Test Sponsorship!</div>
 
-        <Textbox value={bestTimeToCall}
-          id='bestTimeToCall'
-          label='Best TIme To Call'
-          onChange={(val) => setBestTimeToCall(val)} />
+            <div className="container mx-auto">
+                <div className={classes.root}>
+                    <Stepper activeStep={activeStep} orientation="vertical">
+                        {steps.map((label, index) => (
+                            <Step key={label}>
+                                <StepLabel>{label}</StepLabel>
+                                <StepContent>
+                                    <Typography>
+                                        {(() => {
+                                            switch (index) {
+                                                case 0:
+                                                    return (<div className={classes.root}>
+                                                        <Textbox required fullWidth={true} value={studentFirstName} id='studentFirstName' label='Student First Name' onChange={(val) => setStudentFirstName(val)} />
 
-        <Textbox value={learnersPermit}
-          id='learnersPermit'
-          label="Learner's Permit Number"
-          onChange={(val) => setLearnersPermit(val)} />
+                                                        <Textbox required value={studentLastName} id='studentLastName' label='Student Last Name' onChange={(val) => setStudentLastName(val)} />
 
-        <Textbox value={startingDate}
-          id='startingDate'
-          label='Starting Date'
-          onChange={(val) => setStartingDate(val)} />
-
-        <Textbox value={comments}
-          id='comments'
-          label='Comments'
-          onChange={(val) => setComments(val)} />
+                                                        <Textbox required value={streetAddress} id='streetAddress' label='Street Address' onChange={(val) => setStreetAddress(val)} />
 
 
-      </form>
-    </DialogContent>
-    <DialogActions>
-      <button onClick={() => setChild(false, VIEW.NONE)} type="button"
-        className={`py-4 px-12 bg-primary hover:bg-primary-darker rounded text-white`}>
-        Cancel
-      </button>
-      <button onClick={() => formSubmitted(setChild)} type="button"
-        className={`py-4 px-12 bg-primary hover:bg-primary-darker rounded text-white`}>
-        Submit
-      </button>
-    </DialogActions>
-  </div>
+                                                        <Textbox required value={city} id='city' label='City' onChange={(val) => setCity(val)} />
+
+                                                        <Textbox required value={zipCode} id='zipCode' label='Zip Code' onChange={(val) => setZipCode(val)} />
+
+
+                                                        <Textbox required value={studentEmail} id='studentEmail' label='Student Email' onChange={(val) => setStudentEmail(val)} />
+
+                                                        <PhoneNumberTextBox value={studentCellPhone} id='studentCellPhone' label='Student Cell Phone' onChange={(val) => setStudentCellPhone(val)} />
+                                                        
+                                                        <Datepicker value={dob} id='dob' label='Road Test Date' onChange={(val) => setDob(val)} />
+                                                        
+                                                        <Textbox value={bestTimeToCall} id='bestTimeToCall' label='Best Time to Call' onChange={(val) => setBestTimeToCall(val)} />
+
+                                                    </div>
+                                                    );
+                                                case 1:
+                                                    return (<div>
+                                                        <Textbox required value={learnersPermit} id='learnersPermit' label="Learner's Permit Number" onChange={(val) => setLearnersPermit(val)} fullWidth={true} />
+
+                                                        <Datepicker required label='Road Test Date' value={roadTestDate} id='roadTestDate' onChange={(val) => setRoadTestDate(val)} />
+                                                        
+                                                        <TimePicker value={roadTestTime} label='Road Test Time' id='roadTestTime' onChange={(val) => setRoadTestTime(val)} />
+                                                        <br />
+
+                                                        <Textbox value={roadTestLocation} id='roadTestLocation' label='Road Test Location' onChange={(val) => setRoadTestLocation(val)} />
+
+
+
+                                                    </div>
+
+                                                    );
+                                                case 2:
+                                                    return (<div>
+                                                        <Alert severity="info">
+                                                            <AlertTitle>Selected Package</AlertTitle>
+                                                            Road Test Sponsorship - $120.00
+                                                        </Alert>
+                                                        <br />
+                                                        <div>
+                                                            <Checkbox checked={agreeWithPrice} onChange={(e) => setAgreeWithPrice(e.target.checked)}  value="secondary" color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} />
+                                                            I have reviewed and agree upon the price shown above! Credit / Debit card payments done via PayPal will be subject to 3% service charge
+                                                        </div>
+                                                        <br />
+                                                        <div>
+                                                            <Checkbox checked={agreeWithTerms} onChange={(e) => setAgreeWithTerms(e.target.checked)}  value="secondary" color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} /> I have read and agree with the &nbsp;&nbsp;
+
+                                                            <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}> Terms & Conditions </Button>
+                                                            <Popover id={id} open={open} anchorEl={anchorEl} onClose={handleClose}
+                                                                anchorOrigin={{
+                                                                    vertical: 'bottom',
+                                                                    horizontal: 'center',
+                                                                }}
+                                                                transformOrigin={{
+                                                                    vertical: 'top',
+                                                                    horizontal: 'center',
+                                                                }}
+                                                            >
+                                                                <Typography className={classes.typography}>
+                                                                    <ul>
+                                                                        <li>The RMV may cancel the road test schedule due to severe weather, state emergency and any other reason that BBB Auto School does not have any controls over.
+                                                                            <br /> In order to confirm your appointment, please verify with RMV.
+                                                                            <br />If RMV cancels your appointment, you can reschedule with them.
+                                                                            <br /> Road test sponsorship fee does not include any RMV Fees.</li>
+                                                                        <br />
+                                                                        <li>Once booked for sponsorship with BBB Auto School, no cancellation can be made within 72 hours of the appointment.
+</li>
+                                                                        <br />
+                                                                        <li>The student driver should be on time for their road test. If you are more than 15 minutes late, will be marked as no
+                                                                            <br />show resulting in a missed road test and no money will be refunded.
+</li>
+                                                                    </ul>
+
+
+
+                                                                </Typography>
+                                                            </Popover>
+                                                        </div>
+                                                    </div>);
+                                                default:
+                                                    return 'Unknown step';
+                                            }
+                                        })()}
+                                    </Typography>
+                                    <div className={classes.actionsContainer}>
+                                        <div>
+                                            <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}> Back </Button>
+                                            <Button variant="contained" color="primary" onClick={handleNext} className={classes.button}> {activeStep === steps.length - 1 ? 'Submit' : 'Next'} </Button>
+                                        </div>
+                                    </div>
+                                </StepContent>
+                            </Step>
+                        ))}
+                    </Stepper>
+                    {activeStep === steps.length && (
+                        <Paper square elevation={0} className={classes.resetContainer}>
+                            <Typography>Thank you for your registration. Someone will reach out to you via phone or email within the next 24 hours.</Typography>
+                        </Paper>
+                    )}
+                </div>
+            </div>
+        </DialogContent>
+        <DialogActions>
+            <button onClick={() => setChild(false, VIEW.NONE)} type="button"
+                className={`py-4 px-12 bg-primary hover:bg-primary-darker rounded text-white`}>
+                Close
+            </button>
+        </DialogActions>
+    </div>
 }

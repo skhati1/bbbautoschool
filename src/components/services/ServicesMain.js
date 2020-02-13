@@ -5,24 +5,16 @@ import Image1 from '../../images/image1.jpg'
 import Image2 from '../../images/image2.jpg'
 import Image3 from '../../images/image3.jpg'
 
-import Button from '../../components/Button'
 import SplitSection from '../../components/SplitSection'
 
 import { VIEW } from '../Constants';
 
 import Private from './Private'
+import DriversEd from './DriversEd'
 import RoadTest from './RoadTest'
 
 import { makeStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -35,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function ServicesMain({ updateView }) {
+export default function ServicesMain() {
     const [showDialog, setShowDialog] = useState(false)
     const [view, setView] = useState(VIEW.NONE)
 
@@ -48,20 +40,19 @@ export default function ServicesMain({ updateView }) {
     let component = null;
     switch (view) {
         case VIEW.DRIVERS_ED:
-            component = <DriversEd />;
+            component = <DriversEd setChild={setChild}/>;
             break;
         case VIEW.PRIVATE:
             component = <Private setChild={setChild}/>;
             break;
         case VIEW.ROAD_TEST:
-            component = <RoadTest setChild = {setChild} />
+            component = <RoadTest setChild={setChild} />
             break;
         default:
             component = <div>lolidk</div>;
     }
 
     return <div>
-
         <h2 className="text-center text-3xl lg:text-5xl font-semibold">Services</h2>
         <Dialog disableBackdropClick disableEscapeKeyDown open={showDialog} onClose={() => setShowDialog(false)}>
             {component}
@@ -79,11 +70,9 @@ export default function ServicesMain({ updateView }) {
                             <li>6 Hours of Observation</li>
                             <li>2 Hours Parent Class</li>
                         </ul>
-
                         <div className="mt-8 md:mt-12">
                             <a href={Pricing} target="_blank">Pricing &nbsp;&nbsp;&nbsp;</a>
-                            <button onClick={() => updateView(VIEW.DRIVERS_ED)} type="button"
-                                className={`py-4 px-12 bg-primary hover:bg-primary-darker rounded text-white`}>
+                            <button onClick={() => setChild(true, VIEW.DRIVERS_ED)} type="button" className={`py-4 px-12 bg-primary hover:bg-primary-darker rounded text-white`}>
                                 Register Now
                             </button>
                         </div>

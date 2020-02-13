@@ -139,22 +139,22 @@ export default function RoadTest({ setChild }) {
                                             switch (index) {
                                                 case 0:
                                                     return (<div className={classes.root}>
-                                                        <Textbox fullWidth={true} value={studentFirstName} id='studentFirstName' label='Student First Name' onChange={(val) => setStudentFirstName(val)} />
+                                                        <Textbox required fullWidth={true} value={studentFirstName} id='studentFirstName' label='Student First Name' onChange={(val) => setStudentFirstName(val)} />
 
-                                                        <Textbox value={studentLastName} id='studentLastName' label='Student Last Name' onChange={(val) => setStudentLastName(val)} />
+                                                        <Textbox required value={studentLastName} id='studentLastName' label='Student Last Name' onChange={(val) => setStudentLastName(val)} />
 
-                                                        <Textbox value={streetAddress} id='streetAddress' label='Street Address' onChange={(val) => setStreetAddress(val)} />
-
-
-                                                        <Textbox value={city} id='city' label='City' onChange={(val) => setCity(val)} />
-
-                                                        <Textbox value={zipCode} id='zipCode' label='Zip Code' onChange={(val) => setZipCode(val)} />
+                                                        <Textbox required value={streetAddress} id='streetAddress' label='Street Address' onChange={(val) => setStreetAddress(val)} />
 
 
-                                                        <Textbox value={studentEmail} id='studentEmail' label='Student Email' onChange={(val) => setStudentEmail(val)} />
+                                                        <Textbox required value={city} id='city' label='City' onChange={(val) => setCity(val)} />
 
+                                                        <Textbox required value={zipCode} id='zipCode' label='Zip Code' onChange={(val) => setZipCode(val)} />
+
+
+                                                        <Textbox required value={studentEmail} id='studentEmail' label='Student Email' onChange={(val) => setStudentEmail(val)} />
 
                                                         <PhoneNumberTextBox value={studentCellPhone} id='studentCellPhone' label='Student Cell Phone' onChange={(val) => setStudentCellPhone(val)} />
+                                                        
                                                         <Datepicker value={dob} id='dob' label='Road Test Date' onChange={(val) => setDob(val)} />
                                                         
                                                         <Textbox value={bestTimeToCall} id='bestTimeToCall' label='Best Time to Call' onChange={(val) => setBestTimeToCall(val)} />
@@ -163,10 +163,11 @@ export default function RoadTest({ setChild }) {
                                                     );
                                                 case 1:
                                                     return (<div>
-                                                        <Textbox value={learnersPermit} id='learnersPermit' label="Learner's Permit Number" onChange={(val) => setLearnersPermit(val)} fullWidth={true} />
+                                                        <Textbox required value={learnersPermit} id='learnersPermit' label="Learner's Permit Number" onChange={(val) => setLearnersPermit(val)} fullWidth={true} />
 
-                                                        <Datepicker value={roadTestDate} id='roadTestDate' onChange={(val) => setRoadTestDate(val)} />
-                                                        <TimePicker value={roadTestTime} id='roadTestTime' onChange={(val) => setRoadTestTime(val)} />
+                                                        <Datepicker required label='Road Test Date' value={roadTestDate} id='roadTestDate' onChange={(val) => setRoadTestDate(val)} />
+                                                        
+                                                        <TimePicker value={roadTestTime} label='Road Test Time' id='roadTestTime' onChange={(val) => setRoadTestTime(val)} />
                                                         <br />
 
                                                         <Textbox value={roadTestLocation} id='roadTestLocation' label='Road Test Location' onChange={(val) => setRoadTestLocation(val)} />

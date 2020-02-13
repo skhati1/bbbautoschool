@@ -9,11 +9,8 @@ import LabelText from '../components/LabelText';
 import Layout from '../components/layout/Layout';
 import SplitSection from '../components/SplitSection';
 
-
+import ServicesMain from '../components/services/ServicesMain';
 import HeroImage from '../images/showcase.jpg';
-
-
-import ServicesContainer from '../components/services/ServicesContainer';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -103,7 +100,7 @@ export default () => (
     </section>
     
     <div id="services">
-      <ServicesContainer />
+      <ServicesMain />
     </div>
 
 
