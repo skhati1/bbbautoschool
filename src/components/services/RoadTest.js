@@ -198,10 +198,7 @@ export default function RoadTest({ setChild }) {
                                                     return (<div>
                                                         <Alert severity="info">
                                                             <AlertTitle>Selected Package</AlertTitle>
-                                                            <div>
-                                                                <span>Road Test Sponsorship: $120.00</span>
-                                                            </div>
-
+                                                            Road Test Sponsorship - $120.00
                                                         </Alert>
                                                         <br />
                                                         <div>

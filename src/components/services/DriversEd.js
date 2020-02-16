@@ -131,7 +131,7 @@ export default function DriversEd({ setChild }) {
     const [agreeWithPrice, setAgreeWithPrice] = useState(false)
     const [agreeWithTerms, setAgreeWithTerms] = useState(false)
 
-    const [privatePackage, setPrivatePackage] = useState(['___________________&nbsp;', '____'])
+    const [privatePackage, setPrivatePackage] = useState(['___________________', '____'])
     const [startingDate, setStartingDate] = useState('')
     const [comments, setComments] = useState('')
 
@@ -153,44 +153,44 @@ export default function DriversEd({ setChild }) {
                                             switch (index) {
                                                 case 0:
                                                     return (<div className={classes.root}>
-                                                        <Textbox required fullWidth={true} value={studentFirstName} id='studentFirstName' label='Student First Name' onChange={val => setStudentFirstNameval} />
+                                                        <Textbox required fullWidth={true} value={studentFirstName} id='studentFirstName' label='Student First Name' onChange={val => setStudentFirstName(val)} />
 
-                                                        <Textbox required value={studentLastName} id='studentLastName' label='Student Last Name' onChange={val => setStudentLastNameval} />
+                                                        <Textbox required value={studentLastName} id='studentLastName' label='Student Last Name' onChange={val => setStudentLastName(val)} />
 
-                                                        <Textbox required value={streetAddress} id='streetAddress' label='Street Address' onChange={val => setStreetAddressval} />
-
-
-                                                        <Textbox required value={city} id='city' label='City' onChange={val => setCityval} />
-
-                                                        <Textbox required value={zipCode} id='zipCode' label='Zip Code' onChange={val => setZipCodeval} />
+                                                        <Textbox required value={streetAddress} id='streetAddress' label='Street Address' onChange={val => setStreetAddress(val)} />
 
 
-                                                        <Textbox required value={studentEmail} id='studentEmail' label='Student Email' onChange={val => setStudentEmailval} />
+                                                        <Textbox required value={city} id='city' label='City' onChange={val => setCity(val)} />
 
-                                                        <PhoneNumberTextBox value={studentCellPhone} id='studentCellPhone' label='Student Cell Phone' onChange={val => setStudentCellPhoneval} />
+                                                        <Textbox required value={zipCode} id='zipCode' label='Zip Code' onChange={val => setZipCode(val)} />
+
+
+                                                        <Textbox required value={studentEmail} id='studentEmail' label='Student Email' onChange={val => setStudentEmail(val)} />
+
+                                                        <PhoneNumberTextBox value={studentCellPhone} id='studentCellPhone' label='Student Cell Phone' onChange={val => setStudentCellPhone(val)} />
 
 
                                                         <Datepicker value={dob} id='dob' label='Date of Birth' onChange={val => setDobval} />
 
-                                                        <Textbox value={bestTimeToCall} id='bestTimeToCall' label='Best Time to Call' onChange={val => setBestTimeToCallval} />
+                                                        <Textbox value={bestTimeToCall} id='bestTimeToCall' label='Best Time to Call' onChange={val => setBestTimeToCall(val)} />
 
-                                                        <Textbox required value={learnersPermit} id='learnersPermit' label="Learner's Permit Number" onChange={val => setLearnersPermitval} fullWidth={true} />
+                                                        <Textbox required value={learnersPermit} id='learnersPermit' label="Learner's Permit Number" onChange={val => setLearnersPermit(val)} fullWidth={true} />
 
                                                     </div>
                                                     );
                                                 case 1:
                                                     return (<div>
-                                                        <Textbox required value={parentName} id='parentName' label="Parent Name" onChange={val => setParentNameval} />
+                                                        <Textbox required value={parentName} id='parentName' label="Parent Name" onChange={val => setParentName(val)} />
 
-                                                        <Textbox required value={parentEmail} id='parentEmail' label='Parent Email' onChange={val => setParentEmailval} />
+                                                        <Textbox required value={parentEmail} id='parentEmail' label='Parent Email' onChange={val => setParentEmail(val)} />
 
-                                                        <PhoneNumberTextBox value={parentPhone} id='parentPhone' label='Parent Phone' onChange={val => setParentPhoneval} />
+                                                        <PhoneNumberTextBox value={parentPhone} id='parentPhone' label='Parent Phone' onChange={val => setParentPhone(val)} />
 
-                                                        <PhoneNumberTextBox value={homePhone} id='homePhone' label='Home Phone' onChange={val => setHomePhoneval} />
+                                                        <PhoneNumberTextBox value={homePhone} id='homePhone' label='Home Phone' onChange={val => setHomePhone(val)} />
 
-                                                        <Datepicker label='Starting Date' value={startingDate} id='startingDate' onChange={val => setStartingDateval} />
+                                                        <Datepicker label='Starting Date' value={startingDate} id='startingDate' onChange={val => setStartingDate(val)} />
 
-                                                        <Textbox value={comments} id='comments' label='Comments' onChange={val => setCommentsval} />
+                                                        <Textbox value={comments} id='comments' label='Comments' onChange={val => setComments(val)} />
 
 
 
@@ -202,7 +202,7 @@ export default function DriversEd({ setChild }) {
                                                         <Alert severity="info">
                                                             <AlertTitle>Select a Package</AlertTitle>
                                                             <div>
-                                                                <DropDown required options={privatePackageOptions} value={privatePackage} id='streetAddress' label='Package' onChange={val => setPrivatePackageval}></DropDown><br/>
+                                                                <DropDown required options={privatePackageOptions} value={privatePackage} id='streetAddress' label='Package' onChange={val => setPrivatePackage(val)}></DropDown><br/>
                                                                 <br/>
                                                                 Final Price: {privatePackage[1]}
                                                             </div>
