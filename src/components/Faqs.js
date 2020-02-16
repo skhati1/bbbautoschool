@@ -13,7 +13,7 @@ export default class Faqs extends React.Component {
   render() {
     return <div>
       <TableContainer component={Paper}>
-      <Table className="table" aria-label="FAQ table">
+      <Table className="" aria-label="FAQ table">
         <TableHead>
           <TableRow>
             <TableCell>Question</TableCell>

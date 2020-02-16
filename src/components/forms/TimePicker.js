@@ -25,7 +25,7 @@ export default function TimePicker(props) {
             inputProps={{
               step: 300, // 5 min
             }}
-            onChange={(e) => textBoxChanged(e, props)}
+            onChange={e => textBoxChanged(e, props)}
         />
   );
 }

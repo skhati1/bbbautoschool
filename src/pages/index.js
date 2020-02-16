@@ -54,10 +54,8 @@ export default () => (
             <Card className="mb-8">
               <p className="font-semibold text-xl">Winter</p>
               <p className="mt-4">
-                February Break 
-              <hr />
+                February Break <br/>
                 April Break
-              <hr />
               </p>
             </Card>
           </div>
@@ -65,18 +63,12 @@ export default () => (
             <Card className="mb-8">
               <p className="font-semibold text-xl">Summer </p>
               <p className="mt-4">
-                Memorial Day Weekend Class
-                <hr />
-                Summer Break 4th Monday of June
-              <hr />
-                Summer Break 2nd Monday of July
-              <hr />
-                Summer Break 4th Monday of July
-              <hr />
-                Summer Break 2nd Monday of August
-              <hr />
-                Summer Break 4th Monday of August
-              <hr />
+                Memorial Day Weekend Class <br/>
+                4th Monday of June <br/>
+                2nd Monday of July <br/>
+                4th Monday of July <br/>
+                2nd Monday of August <br/>
+                4th Monday of August <br/>
               </p>
             </Card>
           </div>
@@ -84,21 +76,17 @@ export default () => (
             <Card className="mb-8">
               <p className="font-semibold text-xl">Fall</p>
               <p className="mt-4">
-                Labor Day Weekend 
-              <hr />
-                Columbus Day Weekend
-              <hr />
-                Black Friday 
-              <hr />
-                Christmas Break
-              <hr />
+                Labor Day Weekend <br/>
+                Columbus Day Weekend <br/>
+                Black Friday <br/>
+                Christmas Break <br/>
               </p>
             </Card>
           </div>
         </div>
       </div>
     </section>
-    
+
     <div id="services">
       <ServicesMain />
     </div>
@@ -163,7 +151,7 @@ export default () => (
         <Faqs />
       </div>
     </section>
-    
+
     <section id="links" className="py-3">
       <div className="container mx-auto">
         <LabelText className="mb-8 text-gray-600 text-center">Links</LabelText>

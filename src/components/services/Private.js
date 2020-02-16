@@ -15,10 +15,9 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import DropDown from '../forms/Dropdown';
 import Datepicker from '../forms/Datepicker'
-import TimePicker from '../forms/TimePicker'
+import TermsAndConditions from '../../data/policies.pdf'
 import PhoneNumberTextBox from '../forms/PhoneNumberTextBox'
 
-import Popover from '@material-ui/core/Popover';
 
 import { Alert, AlertTitle } from '@material-ui/lab';
 
@@ -53,12 +52,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const privatePackageOptions = {
-  1: "$50.00",
-  2: "$100.00",
-  3: "$150.00",
-  4: "$200.00",
-  5: "$250.00",
-  6: "$270.00"
+    1: "$50.00",
+    2: "$100.00",
+    3: "$150.00",
+    4: "$200.00",
+    5: "$250.00",
+    6: "$270.00"
 }
 
 export default function Private({ setChild }) {
@@ -76,18 +75,6 @@ export default function Private({ setChild }) {
     };
     const handleBack = () => { setActiveStep(activeStep => activeStep - 1); };
 
-    const [anchorEl, setAnchorEl] = useState(null);
-
-    const handleClick = event => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-    const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
-
     const handleSubmit = async () => {
         var emailForm = {
             "First Name": studentFirstName,
@@ -103,12 +90,12 @@ export default function Private({ setChild }) {
             "Date of Birth": dob,
             "Starting Date": startingDate,
             "Comments": comments,
-            "Package": privatePackage,
+            "Package":  privatePackage[0] + " hours : " + privatePackage[1],
             "Agree With Price": agreeWithPrice,
             "Agree With Terms": agreeWithTerms
         }
         var condition = await Email(emailForm)
-        if(condition) { 
+        if (condition) {
             alert("Form successfully sent!")
             setFormSubmittedCorrectly(true)
         } else {
@@ -132,13 +119,13 @@ export default function Private({ setChild }) {
     const [dob, setDob] = useState('')
     const [startingDate, setStartingDate] = useState('')
     const [comments, setComments] = useState('')
-    const [privatePackage, setPrivatePackage] = useState('')
+    const [privatePackage, setPrivatePackage] = useState(['', ''])
     const [agreeWithPrice, setAgreeWithPrice] = useState(false)
     const [agreeWithTerms, setAgreeWithTerms] = useState(false)
 
 
     return <div>
-        <DialogTitle className="text-center">Private Lesson Registration</DialogTitle>
+        <DialogTitle className="text-center">Private Lessons</DialogTitle>
 
         <DialogContent>
             <div className="text-center">Please use the following form to register for our Private Lessons!</div>
@@ -170,11 +157,11 @@ export default function Private({ setChild }) {
                                                         <Textbox required value={studentEmail} id='studentEmail' label='Student Email' onChange={(val) => setStudentEmail(val)} />
 
                                                         <PhoneNumberTextBox required value={studentCellPhone} id='studentCellPhone' label='Student Cell Phone' onChange={(val) => setStudentCellPhone(val)} />
-                                                        
+
                                                         <PhoneNumberTextBox value={homePhone} id='homePhone' label='Home Phone' onChange={(val) => setHomePhone(val)} />
 
                                                         <Datepicker required value={dob} id='dob' label='Date of Birth' onChange={(val) => setDob(val)} />
-                                                        
+
 
                                                     </div>
                                                     );
@@ -185,10 +172,8 @@ export default function Private({ setChild }) {
                                                         <Textbox required value={learnersPermit} id='learnersPermit' label="Learner's Permit Number" onChange={(val) => setLearnersPermit(val)} fullWidth={true} />
 
                                                         <Datepicker label='Starting Date' value={startingDate} id='startingDate' onChange={(val) => setStartingDate(val)} />
-                                                        
+
                                                         <Textbox value={comments} id='comments' label='Comments' onChange={(val) => setComments(val)} />
-
-
 
                                                     </div>
 
@@ -196,48 +181,24 @@ export default function Private({ setChild }) {
                                                 case 2:
                                                     return (<div>
                                                         <Alert severity="info">
-                                                            <AlertTitle>Selected Package</AlertTitle>
-                                                            <DropDown required options={privatePackageOptions} value={privatePackage} id='streetAddress' label='Package' onChange={(val) => setPrivatePackage(val)}></DropDown>
+                                                            <AlertTitle>Select a Package</AlertTitle>
+                                                            <div>
+                                                                <DropDown required options={privatePackageOptions} value={privatePackage} id='streetAddress' label='Package' onChange={(val) => setPrivatePackage(val)}></DropDown>
+                                                                &nbsp; hour(s)  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Final Price: {privatePackage && privatePackage[1]}
+                                                            </div>
+
                                                         </Alert>
                                                         <br />
                                                         <div>
-                                                            <Checkbox checked={agreeWithPrice} onChange={(e) => setAgreeWithPrice(e.target.checked)}  value="secondary" color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} />
+                                                            <Checkbox checked={agreeWithPrice} onChange={(e) => setAgreeWithPrice(e.target.checked)} value="secondary" color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} />
                                                             I have reviewed and agree upon the price shown above! Credit / Debit card payments done via PayPal will be subject to 3% service charge
                                                         </div>
                                                         <br />
                                                         <div>
-                                                            <Checkbox checked={agreeWithTerms} onChange={(e) => setAgreeWithTerms(e.target.checked)}  value="secondary" color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} /> I have read and agree with the &nbsp;&nbsp;
+                                                            <Checkbox checked={agreeWithTerms} onChange={(e) => setAgreeWithTerms(e.target.checked)} value="secondary" color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} /> I have read and agree with the &nbsp;&nbsp;
 
-                                                            <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}> Terms & Conditions </Button>
-                                                            <Popover id={id} open={open} anchorEl={anchorEl} onClose={handleClose}
-                                                                anchorOrigin={{
-                                                                    vertical: 'bottom',
-                                                                    horizontal: 'center',
-                                                                }}
-                                                                transformOrigin={{
-                                                                    vertical: 'top',
-                                                                    horizontal: 'center',
-                                                                }}
-                                                            >
-                                                                <Typography className={classes.typography}>
-                                                                    <ul>
-                                                                        <li>The RMV may cancel the road test schedule due to severe weather, state emergency and any other reason that BBB Auto School does not have any controls over.
-                                                                            <br /> In order to confirm your appointment, please verify with RMV.
-                                                                            <br />If RMV cancels your appointment, you can reschedule with them.
-                                                                            <br /> Road test sponsorship fee does not include any RMV Fees.</li>
-                                                                        <br />
-                                                                        <li>Once booked for sponsorship with BBB Auto School, no cancellation can be made within 72 hours of the appointment.
-</li>
-                                                                        <br />
-                                                                        <li>The student driver should be on time for their road test. If you are more than 15 minutes late, will be marked as no
-                                                                            <br />show resulting in a missed road test and no money will be refunded.
-</li>
-                                                                    </ul>
+                                                            <Button href={TermsAndConditions} variant="contained" color="primary" target="_blank"> Terms & Conditions </Button>
 
-
-
-                                                                </Typography>
-                                                            </Popover>
                                                         </div>
                                                     </div>);
                                                 default:

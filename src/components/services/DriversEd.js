@@ -14,18 +14,17 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
+import DropDown from '../forms/Dropdown';
 import Datepicker from '../forms/Datepicker'
-import TimePicker from '../forms/TimePicker'
 import PhoneNumberTextBox from '../forms/PhoneNumberTextBox'
 
-import Popover from '@material-ui/core/Popover';
-
+import TermsAndConditions from '../../data/policies.pdf'
 import { Alert, AlertTitle } from '@material-ui/lab';
 
 import { VIEW } from '../Constants';
 import Email from '../helpers/Emailer';
 
-const form_steps = ['Student Information', 'Road Test Details', 'Summary'];
+const form_steps = ['Student Information', 'Parent Information', 'Package Summary'];
 
 
 const useStyles = makeStyles(theme => ({
@@ -51,6 +50,12 @@ const useStyles = makeStyles(theme => ({
         width: 200,
     },
 }));
+
+const privatePackageOptions = {
+    "Full Package": "$699.00",
+    "30 Hours Classroom Lessons": "$199.00",
+    "12 Hours Driving Instruction": "$540.00"
+}
 
 export default function DriversEd({ setChild }) {
     const classes = useStyles();
@@ -98,7 +103,7 @@ export default function DriversEd({ setChild }) {
             "Agree With Terms": agreeWithTerms
         }
         var condition = await Email(emailForm)
-        if(condition) { 
+        if (condition) {
             alert("Form successfully sent!")
             setFormSubmittedCorrectly(true)
         } else {
@@ -116,21 +121,25 @@ export default function DriversEd({ setChild }) {
     const [zipCode, setZipCode] = useState('')
     const [studentEmail, setStudentEmail] = useState('')
     const [studentCellPhone, setStudentCellPhone] = useState('')
+    const [homePhone, setHomePhone] = useState('')
+    const [parentName, setParentName] = useState('')
+    const [parentEmail, setParentEmail] = useState('')
+    const [parentPhone, setParentPhone] = useState('')
     const [bestTimeToCall, setBestTimeToCall] = useState('')
     const [learnersPermit, setLearnersPermit] = useState('')
     const [dob, setDob] = useState('')
-    const [roadTestDate, setRoadTestDate] = useState('')
-    const [roadTestTime, setRoadTestTime] = useState('')
-    const [roadTestLocation, setRoadTestLocation] = useState('')
     const [agreeWithPrice, setAgreeWithPrice] = useState(false)
     const [agreeWithTerms, setAgreeWithTerms] = useState(false)
 
+    const [privatePackage, setPrivatePackage] = useState(['___________________&nbsp;', '____'])
+    const [startingDate, setStartingDate] = useState('')
+    const [comments, setComments] = useState('')
 
     return <div>
         <DialogTitle className="text-center">Driver's ED Registration</DialogTitle>
 
         <DialogContent>
-            <div className="text-center">Please use the following form to register for our Road Test Sponsorship!</div>
+            <div className="text-center">Please use the following form to register for our Driver's ED Program!</div>
 
             <div className="container mx-auto">
                 <div className={classes.root}>
@@ -144,38 +153,44 @@ export default function DriversEd({ setChild }) {
                                             switch (index) {
                                                 case 0:
                                                     return (<div className={classes.root}>
-                                                        <Textbox required fullWidth={true} value={studentFirstName} id='studentFirstName' label='Student First Name' onChange={(val) => setStudentFirstName(val)} />
+                                                        <Textbox required fullWidth={true} value={studentFirstName} id='studentFirstName' label='Student First Name' onChange={val => setStudentFirstNameval} />
 
-                                                        <Textbox required value={studentLastName} id='studentLastName' label='Student Last Name' onChange={(val) => setStudentLastName(val)} />
+                                                        <Textbox required value={studentLastName} id='studentLastName' label='Student Last Name' onChange={val => setStudentLastNameval} />
 
-                                                        <Textbox required value={streetAddress} id='streetAddress' label='Street Address' onChange={(val) => setStreetAddress(val)} />
-
-
-                                                        <Textbox required value={city} id='city' label='City' onChange={(val) => setCity(val)} />
-
-                                                        <Textbox required value={zipCode} id='zipCode' label='Zip Code' onChange={(val) => setZipCode(val)} />
+                                                        <Textbox required value={streetAddress} id='streetAddress' label='Street Address' onChange={val => setStreetAddressval} />
 
 
-                                                        <Textbox required value={studentEmail} id='studentEmail' label='Student Email' onChange={(val) => setStudentEmail(val)} />
+                                                        <Textbox required value={city} id='city' label='City' onChange={val => setCityval} />
 
-                                                        <PhoneNumberTextBox value={studentCellPhone} id='studentCellPhone' label='Student Cell Phone' onChange={(val) => setStudentCellPhone(val)} />
-                                                        
-                                                        <Datepicker value={dob} id='dob' label='Road Test Date' onChange={(val) => setDob(val)} />
-                                                        
-                                                        <Textbox value={bestTimeToCall} id='bestTimeToCall' label='Best Time to Call' onChange={(val) => setBestTimeToCall(val)} />
+                                                        <Textbox required value={zipCode} id='zipCode' label='Zip Code' onChange={val => setZipCodeval} />
+
+
+                                                        <Textbox required value={studentEmail} id='studentEmail' label='Student Email' onChange={val => setStudentEmailval} />
+
+                                                        <PhoneNumberTextBox value={studentCellPhone} id='studentCellPhone' label='Student Cell Phone' onChange={val => setStudentCellPhoneval} />
+
+
+                                                        <Datepicker value={dob} id='dob' label='Date of Birth' onChange={val => setDobval} />
+
+                                                        <Textbox value={bestTimeToCall} id='bestTimeToCall' label='Best Time to Call' onChange={val => setBestTimeToCallval} />
+
+                                                        <Textbox required value={learnersPermit} id='learnersPermit' label="Learner's Permit Number" onChange={val => setLearnersPermitval} fullWidth={true} />
 
                                                     </div>
                                                     );
                                                 case 1:
                                                     return (<div>
-                                                        <Textbox required value={learnersPermit} id='learnersPermit' label="Learner's Permit Number" onChange={(val) => setLearnersPermit(val)} fullWidth={true} />
+                                                        <Textbox required value={parentName} id='parentName' label="Parent Name" onChange={val => setParentNameval} />
 
-                                                        <Datepicker required label='Road Test Date' value={roadTestDate} id='roadTestDate' onChange={(val) => setRoadTestDate(val)} />
-                                                        
-                                                        <TimePicker value={roadTestTime} label='Road Test Time' id='roadTestTime' onChange={(val) => setRoadTestTime(val)} />
-                                                        <br />
+                                                        <Textbox required value={parentEmail} id='parentEmail' label='Parent Email' onChange={val => setParentEmailval} />
 
-                                                        <Textbox value={roadTestLocation} id='roadTestLocation' label='Road Test Location' onChange={(val) => setRoadTestLocation(val)} />
+                                                        <PhoneNumberTextBox value={parentPhone} id='parentPhone' label='Parent Phone' onChange={val => setParentPhoneval} />
+
+                                                        <PhoneNumberTextBox value={homePhone} id='homePhone' label='Home Phone' onChange={val => setHomePhoneval} />
+
+                                                        <Datepicker label='Starting Date' value={startingDate} id='startingDate' onChange={val => setStartingDateval} />
+
+                                                        <Textbox value={comments} id='comments' label='Comments' onChange={val => setCommentsval} />
 
 
 
@@ -185,48 +200,25 @@ export default function DriversEd({ setChild }) {
                                                 case 2:
                                                     return (<div>
                                                         <Alert severity="info">
-                                                            <AlertTitle>Selected Package</AlertTitle>
-                                                            Road Test Sponsorship - $120.00
+                                                            <AlertTitle>Select a Package</AlertTitle>
+                                                            <div>
+                                                                <DropDown required options={privatePackageOptions} value={privatePackage} id='streetAddress' label='Package' onChange={val => setPrivatePackageval}></DropDown><br/>
+                                                                <br/>
+                                                                Final Price: {privatePackage[1]}
+                                                            </div>
+
                                                         </Alert>
                                                         <br />
                                                         <div>
-                                                            <Checkbox checked={agreeWithPrice} onChange={(e) => setAgreeWithPrice(e.target.checked)}  value="secondary" color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} />
+                                                            <Checkbox checked={agreeWithPrice} onChange={(e) => setAgreeWithPrice(e.target.checked)} value="secondary" color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} />
                                                             I have reviewed and agree upon the price shown above! Credit / Debit card payments done via PayPal will be subject to 3% service charge
                                                         </div>
                                                         <br />
                                                         <div>
-                                                            <Checkbox checked={agreeWithTerms} onChange={(e) => setAgreeWithTerms(e.target.checked)}  value="secondary" color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} /> I have read and agree with the &nbsp;&nbsp;
+                                                            <Checkbox checked={agreeWithTerms} onChange={(e) => setAgreeWithTerms(e.target.checked)} value="secondary" color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} /> I have read and agree with the &nbsp;&nbsp;
 
-                                                            <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}> Terms & Conditions </Button>
-                                                            <Popover id={id} open={open} anchorEl={anchorEl} onClose={handleClose}
-                                                                anchorOrigin={{
-                                                                    vertical: 'bottom',
-                                                                    horizontal: 'center',
-                                                                }}
-                                                                transformOrigin={{
-                                                                    vertical: 'top',
-                                                                    horizontal: 'center',
-                                                                }}
-                                                            >
-                                                                <Typography className={classes.typography}>
-                                                                    <ul>
-                                                                        <li>The RMV may cancel the road test schedule due to severe weather, state emergency and any other reason that BBB Auto School does not have any controls over.
-                                                                            <br /> In order to confirm your appointment, please verify with RMV.
-                                                                            <br />If RMV cancels your appointment, you can reschedule with them.
-                                                                            <br /> Road test sponsorship fee does not include any RMV Fees.</li>
-                                                                        <br />
-                                                                        <li>Once booked for sponsorship with BBB Auto School, no cancellation can be made within 72 hours of the appointment.
-</li>
-                                                                        <br />
-                                                                        <li>The student driver should be on time for their road test. If you are more than 15 minutes late, will be marked as no
-                                                                            <br />show resulting in a missed road test and no money will be refunded.
-</li>
-                                                                    </ul>
+                                                            <Button href={TermsAndConditions} variant="contained" color="primary" target="_blank"> Terms & Conditions </Button>
 
-
-
-                                                                </Typography>
-                                                            </Popover>
                                                         </div>
                                                     </div>);
                                                 default:
