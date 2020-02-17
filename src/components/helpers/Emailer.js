@@ -34,7 +34,7 @@ tr:nth-child(even) {
 
 <table>
   <tr>
-    <th>&nbsp</th>
+    <th>&nbsp;</th>
     <th>&nbsp;</th>
   </tr>
     `
@@ -66,7 +66,7 @@ export default async function Email(dictionary) {
     }
 
     console.log(message)
-    var service_id = "personal_gmail";
+    var service_id = "school_gmail";
     
     var template_id = "bbb_auto_school";
 

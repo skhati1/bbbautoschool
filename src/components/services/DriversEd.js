@@ -23,7 +23,7 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 
 import { VIEW } from '../Constants';
 import Email from '../helpers/Emailer';
-
+import Validate from '../helpers/Validator';
 const form_steps = ['Student Information', 'Parent Information', 'Package Summary'];
 
 
@@ -93,24 +93,37 @@ export default function DriversEd({ setChild }) {
             "Zip Code": zipCode,
             "Student Email": studentEmail,
             "Student Cell Phone": studentCellPhone,
+            "Date of Birth": dob,
             "Best Time to Call": bestTimeToCall,
             "Learner's Permit": learnersPermit,
-            "Date of Birth": dob.toString(),
-            "Road Test Date": roadTestDate,
-            "Road Test Time": roadTestTime,
-            "Road Test Location": roadTestLocation,
+            "Parent Name": parentName,
+            "Parent Email": parentEmail,
+            "Parent Phone": parentPhone,
+            "Home Phone" : homePhone,
+            "Starting Date": startingDate,
+            "Package":  "Driver's ED " + privatePackage[0] + " : " + privatePackage[1],
             "Agree With Price": agreeWithPrice,
             "Agree With Terms": agreeWithTerms
         }
-        var condition = await Email(emailForm)
-        if (condition) {
-            alert("Form successfully sent!")
-            setFormSubmittedCorrectly(true)
-        } else {
-            alert("Error Submitting Registration. Please try again!")
-            setFormSubmittedCorrectly(false)
-            setActiveStep(steps.length - 1)
-            return
+        
+        var [isValid, invalidItems] = Validate(emailForm)
+        if(isValid){
+            var condition = await Email(emailForm)
+            if (condition) {
+                alert("Form successfully sent!")
+                setFormSubmittedCorrectly(true)
+            } else {
+                alert("Error Submitting Registration. Please try again!")
+                setFormSubmittedCorrectly(false)
+                setActiveStep(steps.length - 1)
+            }
+        }
+        else {
+            errorItem = 'Please fill out the following items and try again: \n'
+            for(var item in invalidItems){
+                errorItem += item + "\n"
+            }
+            alert('Please fill out the following items and try again: \n')
         }
     }
 
@@ -131,7 +144,7 @@ export default function DriversEd({ setChild }) {
     const [agreeWithPrice, setAgreeWithPrice] = useState(false)
     const [agreeWithTerms, setAgreeWithTerms] = useState(false)
 
-    const [privatePackage, setPrivatePackage] = useState(['___________________', '____'])
+    const [privatePackage, setPrivatePackage] = useState(['', ''])
     const [startingDate, setStartingDate] = useState('')
     const [comments, setComments] = useState('')
 
@@ -167,22 +180,22 @@ export default function DriversEd({ setChild }) {
 
                                                         <Textbox required value={studentEmail} id='studentEmail' label='Student Email' onChange={val => setStudentEmail(val)} />
 
-                                                        <PhoneNumberTextBox value={studentCellPhone} id='studentCellPhone' label='Student Cell Phone' onChange={val => setStudentCellPhone(val)} />
+                                                        <PhoneNumberTextBox required value={studentCellPhone} id='studentCellPhone' label='Student Cell Phone' onChange={val => setStudentCellPhone(val)} />
 
 
-                                                        <Datepicker value={dob} id='dob' label='Date of Birth' onChange={val => setDobval} />
+                                                        <Datepicker required value={dob} id='dob' label='Date of Birth' onChange={val => setDob(val)} />
 
                                                         <Textbox value={bestTimeToCall} id='bestTimeToCall' label='Best Time to Call' onChange={val => setBestTimeToCall(val)} />
 
-                                                        <Textbox required value={learnersPermit} id='learnersPermit' label="Learner's Permit Number" onChange={val => setLearnersPermit(val)} fullWidth={true} />
+                                                        <Textbox value={learnersPermit} id='learnersPermit' label="Learner's Permit Number" onChange={val => setLearnersPermit(val)} fullWidth={true} />
 
                                                     </div>
                                                     );
                                                 case 1:
                                                     return (<div>
-                                                        <Textbox required value={parentName} id='parentName' label="Parent Name" onChange={val => setParentName(val)} />
+                                                        <Textbox value={parentName} id='parentName' label="Parent Name" onChange={val => setParentName(val)} />
 
-                                                        <Textbox required value={parentEmail} id='parentEmail' label='Parent Email' onChange={val => setParentEmail(val)} />
+                                                        <Textbox value={parentEmail} id='parentEmail' label='Parent Email' onChange={val => setParentEmail(val)} />
 
                                                         <PhoneNumberTextBox value={parentPhone} id='parentPhone' label='Parent Phone' onChange={val => setParentPhone(val)} />
 
@@ -202,7 +215,7 @@ export default function DriversEd({ setChild }) {
                                                         <Alert severity="info">
                                                             <AlertTitle>Select a Package</AlertTitle>
                                                             <div>
-                                                                <DropDown required options={privatePackageOptions} value={privatePackage} id='streetAddress' label='Package' onChange={val => setPrivatePackage(val)}></DropDown><br/>
+                                                                <DropDown required options={privatePackageOptions} value={privatePackage} id='privatePackage' label='Package' onChange={val => setPrivatePackage(val)}></DropDown><br/>
                                                                 <br/>
                                                                 Final Price: {privatePackage[1]}
                                                             </div>
@@ -211,11 +224,12 @@ export default function DriversEd({ setChild }) {
                                                         <br />
                                                         <div>
                                                             <Checkbox checked={agreeWithPrice} onChange={(e) => setAgreeWithPrice(e.target.checked)} value="secondary" color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} />
-                                                            I have reviewed and agree upon the price shown above! Credit / Debit card payments done via PayPal will be subject to 3% service charge
+                                                            *I have reviewed and agree upon the price shown above! Credit / Debit card payments done via PayPal will be subject to 3% service charge
                                                         </div>
                                                         <br />
                                                         <div>
-                                                            <Checkbox checked={agreeWithTerms} onChange={(e) => setAgreeWithTerms(e.target.checked)} value="secondary" color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} /> I have read and agree with the &nbsp;&nbsp;
+                                                            <Checkbox checked={agreeWithTerms} onChange={(e) => setAgreeWithTerms(e.target.checked)} value="secondary" color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} /> 
+                                                            *I have read and agree with the &nbsp;&nbsp;
 
                                                             <Button href={TermsAndConditions} variant="contained" color="primary" target="_blank"> Terms & Conditions </Button>
 

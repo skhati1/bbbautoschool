@@ -90,19 +90,29 @@ export default function Private({ setChild }) {
             "Date of Birth": dob,
             "Starting Date": startingDate,
             "Comments": comments,
-            "Package":  privatePackage[0] + " hours : " + privatePackage[1],
+            "Package": "Private Lesson " + privatePackage[0] + " hours : " + privatePackage[1],
             "Agree With Price": agreeWithPrice,
             "Agree With Terms": agreeWithTerms
         }
-        var condition = await Email(emailForm)
-        if (condition) {
-            alert("Form successfully sent!")
-            setFormSubmittedCorrectly(true)
-        } else {
-            alert("Error Submitting Registration. Please try again!")
-            setFormSubmittedCorrectly(false)
-            setActiveStep(steps.length - 1)
-            return
+        
+        var [isValid, invalidItems] = Validate(emailForm)
+        if(isValid){
+            var condition = await Email(emailForm)
+            if (condition) {
+                alert("Form successfully sent!")
+                setFormSubmittedCorrectly(true)
+            } else {
+                alert("Error Submitting Registration. Please try again!")
+                setFormSubmittedCorrectly(false)
+                setActiveStep(steps.length - 1)
+            }
+        }
+        else {
+            errorItem = 'Please fill out the following items and try again: \n'
+            for(var item in invalidItems){
+                errorItem += item + "\n"
+            }
+            alert('Please fill out the following items and try again: \n')
         }
     }
 
@@ -158,18 +168,19 @@ export default function Private({ setChild }) {
 
                                                         <PhoneNumberTextBox required value={studentCellPhone} id='studentCellPhone' label='Student Cell Phone' onChange={(val) => setStudentCellPhone(val)} />
 
+                                                        <Datepicker required value={dob} id='dob' label='Date of Birth' onChange={(val) => setDob(val)} />
+
                                                         <PhoneNumberTextBox value={homePhone} id='homePhone' label='Home Phone' onChange={(val) => setHomePhone(val)} />
 
-                                                        <Datepicker required value={dob} id='dob' label='Date of Birth' onChange={(val) => setDob(val)} />
 
 
                                                     </div>
                                                     );
                                                 case 1:
                                                     return (<div>
-                                                        <Textbox value={bestTimeToCall} id='bestTimeToCall' label='Best Time to Call' onChange={(val) => setBestTimeToCall(val)} />
-
                                                         <Textbox required value={learnersPermit} id='learnersPermit' label="Learner's Permit Number" onChange={(val) => setLearnersPermit(val)} fullWidth={true} />
+
+                                                        <Textbox value={bestTimeToCall} id='bestTimeToCall' label='Best Time to Call' onChange={(val) => setBestTimeToCall(val)} />
 
                                                         <Datepicker label='Starting Date' value={startingDate} id='startingDate' onChange={(val) => setStartingDate(val)} />
 
@@ -183,7 +194,7 @@ export default function Private({ setChild }) {
                                                         <Alert severity="info">
                                                             <AlertTitle>Select a Package</AlertTitle>
                                                             <div>
-                                                                <DropDown required options={privatePackageOptions} value={privatePackage} id='streetAddress' label='Package' onChange={(val) => setPrivatePackage(val)}></DropDown>
+                                                                <DropDown required options={privatePackageOptions} value={privatePackage} id='privatePackage' label='Package' onChange={(val) => setPrivatePackage(val)}></DropDown>
                                                                 &nbsp; hour(s)  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Final Price: {privatePackage && privatePackage[1]}
                                                             </div>
 
@@ -191,11 +202,12 @@ export default function Private({ setChild }) {
                                                         <br />
                                                         <div>
                                                             <Checkbox checked={agreeWithPrice} onChange={(e) => setAgreeWithPrice(e.target.checked)} value="secondary" color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} />
-                                                            I have reviewed and agree upon the price shown above! Credit / Debit card payments done via PayPal will be subject to 3% service charge
+                                                            *I have reviewed and agree upon the price shown above! Credit / Debit card payments done via PayPal will be subject to 3% service charge
                                                         </div>
                                                         <br />
                                                         <div>
-                                                            <Checkbox checked={agreeWithTerms} onChange={(e) => setAgreeWithTerms(e.target.checked)} value="secondary" color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} /> I have read and agree with the &nbsp;&nbsp;
+                                                            <Checkbox checked={agreeWithTerms} onChange={(e) => setAgreeWithTerms(e.target.checked)} value="secondary" color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} /> 
+                                                            *I have read and agree with the &nbsp;&nbsp;
 
                                                             <Button href={TermsAndConditions} variant="contained" color="primary" target="_blank"> Terms & Conditions </Button>
 

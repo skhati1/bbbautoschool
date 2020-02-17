@@ -1,8 +1,9 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 
-function textBoxChanged(e, props) {
-    props.onChange(e, props)
+function textBoxChanged(event, props) {
+    console.log(event.target.value)
+    props.onChange(event.target.value, props)
 }
 
 export default function Datepicker(props) {
@@ -22,7 +23,7 @@ export default function Datepicker(props) {
             InputLabelProps={{
                 shrink: true
             }}
-            onChange={(e) => textBoxChanged(e, props)}
+            onChange={(event) => textBoxChanged(event, props)}
         />
     );
 }

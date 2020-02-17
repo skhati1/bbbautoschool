@@ -14,23 +14,30 @@ function addDashes(item) {
     return fNum;
 }
 
-function textBoxChanged(e, props) {
-    var val = addDashes(e.target.value)
-    props.onChange(val)
-}
-
 export default function PhoneNumberTextBox(props) {
+    const [isEmpty, setIsEmpty] = React.useState(false);
     var customLabel = props.label
     if (props.required) {
         customLabel += " *"
     }
+    function textBoxChanged(e, props, setIsEmpty) {
+        var val = addDashes(e.target.value)
+        props.onChange(val)
+        if (val.length > 0) {
+            setIsEmpty(false)
+        } else {
+            setIsEmpty(true)
+        }
+    }
+
     return <TextField
         value={props.value}
-        onChange={(e) => textBoxChanged(e, props)}
+        onChange={(e) => textBoxChanged(e, props, setIsEmpty)}
         id={props.id}
         label={customLabel}
         style={{ margin: 8 }}
         variant="outlined"
+        error={props.required && isEmpty}
         fullWidth
         margin="normal"
         InputLabelProps={{

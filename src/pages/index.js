@@ -54,8 +54,8 @@ export default () => (
             <Card className="mb-8">
               <p className="font-semibold text-xl">Winter</p>
               <p className="mt-4">
-                February Break <br/>
-                April Break
+                FEB Break <br/>
+                APR Break
               </p>
             </Card>
           </div>
@@ -64,11 +64,11 @@ export default () => (
               <p className="font-semibold text-xl">Summer </p>
               <p className="mt-4">
                 Memorial Day Weekend Class <br/>
-                4th Monday of June <br/>
-                2nd Monday of July <br/>
-                4th Monday of July <br/>
-                2nd Monday of August <br/>
-                4th Monday of August <br/>
+                4th Monday of JUN <br/>
+                2nd Monday of JUL <br/>
+                4th Monday of JUL <br/>
+                2nd Monday of AUG <br/>
+                4th Monday of AUG <br/>
               </p>
             </Card>
           </div>
