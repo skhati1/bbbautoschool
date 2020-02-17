@@ -121,7 +121,6 @@ export default function DriversEd({ setChild }) {
         }
         
         var [isValid, invalidItems] = Validate(requiredFields)
-        console.log("invalid items are" + invalidItems)
         if(isValid){
             var condition = await Email(emailForm)
             if (condition) {
@@ -131,16 +130,15 @@ export default function DriversEd({ setChild }) {
                 alert("Error Submitting Registration. Please try again!")
                 setFormSubmittedCorrectly(false)
                 setActiveStep(steps.length - 1)
-                return
             }
         }
         else {
             var errorItem = 'Please fill out the following items and try again: \n'
             for(var item in invalidItems){
-                errorItem += item + "\n"
+                errorItem += invalidItems[item] + "\n"
             }
+            setFormSubmittedCorrectly(false)
             alert(errorItem)
-            return
         }
     }
 
