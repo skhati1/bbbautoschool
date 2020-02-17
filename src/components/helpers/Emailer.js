@@ -70,7 +70,7 @@ export default async function Email(dictionary) {
     
     var template_id = "bbb_auto_school";
 
-    var userId = 'user_YMFMqxEjBDsnnfW6RbVgb';
+    var userId = process.env.EMAIL_JS_USER_ID;
 
     var sendAction = "";
     try {
