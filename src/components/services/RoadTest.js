@@ -104,7 +104,7 @@ export default function RoadTest({ setChild }) {
             "Road Test Date": roadTestDate,
             "Road Test Time": roadTestTime,
             "Road Test Location": roadTestLocation,
-            "Package": privatePackage[0] + " hours : " + privatePackage[1],
+            "Package": bbbPackage,
             "Agree With Price": agreeWithPrice,
             "Agree With Terms": agreeWithTerms
         }
@@ -127,14 +127,13 @@ export default function RoadTest({ setChild }) {
     const [zipCode, setZipCode] = useState('')
     const [studentEmail, setStudentEmail] = useState('')
     const [studentCellPhone, setStudentCellPhone] = useState('')
-    const [homePhone, setHomePhone] = useState('')
+    const [dob, setDob] = useState('')
     const [bestTimeToCall, setBestTimeToCall] = useState('')
     const [learnersPermit, setLearnersPermit] = useState('')
-    const [dob, setDob] = useState('')
     const [roadTestDate, setRoadTestDate] = useState('')
     const [roadTestTime, setRoadTestTime] = useState('')
     const [roadTestLocation, setRoadTestLocation] = useState('')
-    const [privatePackage, setPrivatePackage] = useState(['', ''])
+    const bbbPackage = "Road Test Sponsorship - $120.00"
     const [agreeWithPrice, setAgreeWithPrice] = useState(false)
     const [agreeWithTerms, setAgreeWithTerms] = useState(false)
 
@@ -197,7 +196,7 @@ export default function RoadTest({ setChild }) {
                                                     return (<div>
                                                         <Alert severity="info">
                                                             <AlertTitle>Selected Package</AlertTitle>
-                                                            Road Test Sponsorship - $120.00
+                                                            {bbbPackage}
                                                         </Alert>
                                                         <br />
                                                         <div>
