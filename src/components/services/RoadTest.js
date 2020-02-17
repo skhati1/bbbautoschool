@@ -98,10 +98,9 @@ export default function RoadTest({ setChild }) {
             "Zip Code": zipCode,
             "Student Email": studentEmail,
             "Student Cell Phone": studentCellPhone,
-            "Home Phone": homePhone,
+            "Date of Birth": dob,
             "Best Time to Call": bestTimeToCall,
             "Learner's Permit": learnersPermit,
-            "Date of Birth": dob,
             "Road Test Date": roadTestDate,
             "Road Test Time": roadTestTime,
             "Road Test Location": roadTestLocation,
@@ -109,12 +108,12 @@ export default function RoadTest({ setChild }) {
             "Agree With Price": agreeWithPrice,
             "Agree With Terms": agreeWithTerms
         }
-        var condition = await Email(emailForm)
-        if (condition) {
+        var [status,text] = await Email(emailForm)
+        if (status == 200) {
             alert("Form successfully sent!")
             setFormSubmittedCorrectly(true)
         } else {
-            alert("Error Submitting Registration. Please try again!")
+            alert("Error Submitting Registration - " + text)
             setFormSubmittedCorrectly(false)
             setActiveStep(steps.length - 1)
             return
@@ -225,14 +224,9 @@ export default function RoadTest({ setChild }) {
                                                                             <br />- In order to confirm your appointment, please verify with RMV.
                                                                             <br />- If RMV cancels your appointment, you can reschedule with them.
                                                                             <br />- Road test sponsorship fee does not include any RMV Fees.</li>
-                                                                        <li>- Once booked for sponsorship with BBB Auto School, no cancellation can be made within 72 hours of the appointment.
-</li>                                                                        <li>- The student driver should be on time for their road test. If you are more than 15 minutes late, will be marked as no
-                                                                            <br />show resulting in a missed road test and no money will be refunded.
-</li>
+                                                                            <li>- Once booked for sponsorship with BBB Auto School, no cancellation can be made within 72 hours of the appointment.</li>                                                                        <li>- The student driver should be on time for their road test. If you are more than 15 minutes late, will be marked as no
+                                                                            <br />show resulting in a missed road test and no money will be refunded.</li>
                                                                     </ul>
-
-
-
                                                                 </Typography>
                                                             </Popover>
                                                         </div>
