@@ -105,8 +105,23 @@ export default function DriversEd({ setChild }) {
             "Agree With Price": agreeWithPrice,
             "Agree With Terms": agreeWithTerms
         }
+
+        var requiredFields = {
+            "First Name": studentFirstName,
+            "Last Name": studentLastName,
+            "Street Address": streetAddress,
+            "City": city,
+            "Zip Code": zipCode,
+            "Student Email": studentEmail,
+            "Student Cell Phone": studentCellPhone,
+            "Date of Birth": dob,
+            "Package": privatePackage[0],
+            "Agree With Price": agreeWithPrice,
+            "Agree With Terms": agreeWithTerms
+        }
         
-        var [isValid, invalidItems] = Validate(emailForm)
+        var [isValid, invalidItems] = Validate(requiredFields)
+        console.log("invalid items are" + invalidItems)
         if(isValid){
             var condition = await Email(emailForm)
             if (condition) {
@@ -116,14 +131,16 @@ export default function DriversEd({ setChild }) {
                 alert("Error Submitting Registration. Please try again!")
                 setFormSubmittedCorrectly(false)
                 setActiveStep(steps.length - 1)
+                return
             }
         }
         else {
-            errorItem = 'Please fill out the following items and try again: \n'
+            var errorItem = 'Please fill out the following items and try again: \n'
             for(var item in invalidItems){
                 errorItem += item + "\n"
             }
-            alert('Please fill out the following items and try again: \n')
+            alert(errorItem)
+            return
         }
     }
 
