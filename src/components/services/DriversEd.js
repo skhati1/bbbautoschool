@@ -133,12 +133,13 @@ export default function DriversEd({ setChild }) {
             }
         }
         else {
-            var errorItem = 'Please fill out the following items and try again: \n'
+            var errorItem = "Please fill out the following items and try again: \n"
             for(var item in invalidItems){
                 errorItem += invalidItems[item] + "\n"
             }
-            setFormSubmittedCorrectly(false)
             alert(errorItem)
+            setFormSubmittedCorrectly(false)
+            setActiveStep(-1)
         }
     }
 
