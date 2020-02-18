@@ -105,6 +105,7 @@ export default function RoadTest({ setChild }) {
             "Road Test Date": roadTestDate,
             "Road Test Time": roadTestTime,
             "Road Test Location": roadTestLocation,
+            "Road Test Scheduled": roadTestScheduled,
             "Package": bbbPackage,
             "Agree With Price": agreeWithPrice,
             "Agree With Terms": agreeWithTerms
@@ -169,6 +170,7 @@ export default function RoadTest({ setChild }) {
     const bbbPackage = "Road Test Sponsorship - $120.00"
     const [agreeWithPrice, setAgreeWithPrice] = useState(false)
     const [agreeWithTerms, setAgreeWithTerms] = useState(false)
+    const [roadTestScheduled, setRoadTestScheduled] = useState(false)
 
 
     return <div>
@@ -215,12 +217,16 @@ export default function RoadTest({ setChild }) {
                                                         <Textbox required value={learnersPermit} id='learnersPermit' label="Learner's Permit Number" onChange={(val) => setLearnersPermit(val)} fullWidth={true} />
 
                                                         <Textbox value={bestTimeToCall} id='bestTimeToCall' label='Best Time to Call' onChange={(val) => setBestTimeToCall(val)} />
+                                                        
 
                                                         <Datepicker label='Road Test Date' value={roadTestDate} id='roadTestDate' onChange={(val) => setRoadTestDate(val)} />
 
                                                         <TimePicker label='Road Test Time' value={roadTestTime} id='roadTestTime' onChange={(val) => setRoadTestTime(val)} />
 
                                                         <Textbox value={roadTestLocation} id='roadTestLocation' label='Road Test Location' onChange={(val) => setRoadTestLocation(val)} />
+
+                                                        <Checkbox checked={roadTestScheduled} onChange={(e) => setRoadTestScheduled(e.target.checked)} value="secondary" color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} />
+                                                            Have you already scheduled a Road Test with the RMV?
 
                                                     </div>
 
