@@ -24,7 +24,8 @@ import PhoneNumberTextBox from '../forms/PhoneNumberTextBox'
 import { Alert, AlertTitle } from '@material-ui/lab';
 
 import { VIEW } from '../Constants';
-import Email from '../helpers/Emailer';
+import { Email, BackupEmail } from '../helpers/Emailer';
+import Validate from '../helpers/Validator';
 
 const form_steps = ['Student Information', 'Driver Details', 'Package Summary'];
 
@@ -109,24 +110,46 @@ export default function RoadTest({ setChild }) {
             "Agree With Terms": agreeWithTerms
         }
         
-        var [isValid, invalidItems] = Validate(emailForm)
-        if(isValid){
+        var requiredFields = {
+            "First Name": studentFirstName,
+            "Last Name": studentLastName,
+            "Street Address": streetAddress,
+            "City": city,
+            "Zip Code": zipCode,
+            "Student Email": studentEmail,
+            "Student Cell Phone": studentCellPhone,
+            "Date of Birth": dob,
+            "Learner's Permit Number": learnersPermit,
+            "Package": bbbPackage,
+            "Agree With Price": agreeWithPrice,
+            "Agree With Terms": agreeWithTerms
+        }
+
+        var [isValid, invalidItems] = Validate(requiredFields)
+        if (isValid) {
             var condition = await Email(emailForm)
             if (condition) {
-                alert("Form successfully sent!")
                 setFormSubmittedCorrectly(true)
             } else {
-                alert("Error Submitting Registration. Please try again!")
-                setFormSubmittedCorrectly(false)
-                setActiveStep(steps.length - 1)
+                var backupCondition = await BackupEmail(emailForm, condition)
+                if (backupCondition) {
+                    setFormSubmittedCorrectly(true)
+                }
+                else {
+                    alert("Submitting Registration. Please try again or give us a call!")
+                    setFormSubmittedCorrectly(false)
+                    handleBack()
+                }
             }
         }
         else {
-            errorItem = 'Please fill out the following items and try again: \n'
-            for(var item in invalidItems){
-                errorItem += item + "\n"
+            var errorItem = "Please fill out the following items and try again: \n"
+            for (var item in invalidItems) {
+                errorItem += invalidItems[item] + "\n"
             }
-            alert('Please fill out the following items and try again: \n')
+            alert(errorItem)
+            setFormSubmittedCorrectly(false)
+            handleBack()
         }
     }
 

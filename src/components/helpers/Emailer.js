@@ -46,38 +46,68 @@ const end_template = `
 </html>
 `
 
-export default async function Email(dictionary) {
-    console.log(dictionary)
+export async function Email(dictionary) {
+  console.log(dictionary)
 
-    const generateHtml = (dictionary) => {
-        var result = start_template
-        Object.keys(dictionary).forEach(function(key){
-            result += "<tr><td>" + key + "</td><td>" + dictionary[key] + "</td></tr>"
-        })
-        result += end_template
-        return result
-    }
+  const generateHtml = (dictionary) => {
+    var result = start_template
+    Object.keys(dictionary).forEach(function (key) {
+      result += "<tr><td>" + key + "</td><td>" + dictionary[key] + "</td></tr>"
+    })
+    result += end_template
+    return result
+  }
 
-    var message = {
-        "first_name": dictionary["First Name"],
-        "last_name": dictionary["Last Name"],
-        "student_email": dictionary["Student Email"],
-        "message": generateHtml(dictionary)
-    }
+  var message = {
+    "first_name": dictionary["First Name"],
+    "last_name": dictionary["Last Name"],
+    "student_email": dictionary["Student Email"],
+    "message": generateHtml(dictionary)
+  }
 
-    console.log(message)
-    var service_id = "school_gmail";
-    
-    var template_id = "bbb_auto_school";
+  console.log(message)
+  var service_id = "school_gmail";
 
-    var userId = 'user_YMFMqxEjBDsnnfW6RbVgb';
+  var template_id = "bbb_auto_school";
 
-    var sendAction = "";
-    try {
-        sendAction = await emailjs.send(service_id, template_id, message, userId)
-    } catch (exception) {
-        console.log(exception);
-    } console.log(sendAction)
-    return [sendAction.status, sendAction.text]
+  var userId = 'user_YMFMqxEjBDsnnfW6RbVgb';
+
+  var sendAction = "";
+  try {
+    sendAction = await emailjs.send(service_id, template_id, message, userId)
+  } catch (exception) {
+    console.log(exception);
+  } console.log(sendAction)
+  return [sendAction.status, sendAction.text]
 }
 
+export async function BackupEmail(dictionary, [previousStatus, reason]) {
+  const generateHtml = (dictionary) => {
+    var result = start_template
+    Object.keys(dictionary).forEach(function (key) {
+      result += "<tr><td>" + key + "</td><td>" + dictionary[key] + "</td></tr>"
+    })
+    result += end_template
+    return result
+  }
+  var message = {
+    "message": generateHtml(dictionary),
+    "previousStatus": previousStatus,
+    "reason": reason
+  }
+  var service_id = "school_gmail";
+
+  var template_id = "bbb_auto_school_clone";
+
+  var userId = 'user_YMFMqxEjBDsnnfW6RbVgb';
+
+  var sendAction = "";
+  try {
+    sendAction = await emailjs.send(service_id, template_id, message, userId)
+  } catch (exception) {
+    console.log(exception);
+  } console.log(sendAction)
+  return [sendAction.status, sendAction.text]
+}
+
+export default [Email, BackupEmail];

@@ -22,7 +22,7 @@ import TermsAndConditions from '../../data/policies.pdf'
 import { Alert, AlertTitle } from '@material-ui/lab';
 
 import { VIEW } from '../Constants';
-import Email from '../helpers/Emailer';
+import { Email, BackupEmail } from '../helpers/Emailer';
 import Validate from '../helpers/Validator';
 const form_steps = ['Student Information', 'Parent Information', 'Package Summary'];
 
@@ -99,9 +99,9 @@ export default function DriversEd({ setChild }) {
             "Parent Name": parentName,
             "Parent Email": parentEmail,
             "Parent Phone": parentPhone,
-            "Home Phone" : homePhone,
+            "Home Phone": homePhone,
             "Starting Date": startingDate,
-            "Package":  "Driver's ED " + privatePackage[0] + " : " + privatePackage[1],
+            "Package": "Driver's ED " + privatePackage[0] + " : " + privatePackage[1],
             "Agree With Price": agreeWithPrice,
             "Agree With Terms": agreeWithTerms
         }
@@ -119,27 +119,32 @@ export default function DriversEd({ setChild }) {
             "Agree With Price": agreeWithPrice,
             "Agree With Terms": agreeWithTerms
         }
-        
+
         var [isValid, invalidItems] = Validate(requiredFields)
-        if(isValid){
+        if (isValid) {
             var condition = await Email(emailForm)
             if (condition) {
-                alert("Form successfully sent!")
                 setFormSubmittedCorrectly(true)
             } else {
-                alert("Error Submitting Registration. Please try again!")
-                setFormSubmittedCorrectly(false)
-                setActiveStep(steps.length - 1)
+                var backupCondition = await BackupEmail(emailForm, condition)
+                if (backupCondition) {
+                    setFormSubmittedCorrectly(true)
+                }
+                else {
+                    alert("Submitting Registration. Please try again or give us a call!")
+                    setFormSubmittedCorrectly(false)
+                    handleBack()
+                }
             }
         }
         else {
             var errorItem = "Please fill out the following items and try again: \n"
-            for(var item in invalidItems){
+            for (var item in invalidItems) {
                 errorItem += invalidItems[item] + "\n"
             }
             alert(errorItem)
             setFormSubmittedCorrectly(false)
-            setActiveStep(-1)
+            handleBack()
         }
     }
 
@@ -231,8 +236,8 @@ export default function DriversEd({ setChild }) {
                                                         <Alert severity="info">
                                                             <AlertTitle>Select a Package</AlertTitle>
                                                             <div>
-                                                                <DropDown required options={privatePackageOptions} value={privatePackage} id='privatePackage' label='Package' onChange={val => setPrivatePackage(val)}></DropDown><br/>
-                                                                <br/>
+                                                                <DropDown required options={privatePackageOptions} value={privatePackage} id='privatePackage' label='Package' onChange={val => setPrivatePackage(val)}></DropDown><br />
+                                                                <br />
                                                                 Final Price: {privatePackage[1]}
                                                             </div>
 
@@ -244,7 +249,7 @@ export default function DriversEd({ setChild }) {
                                                         </div>
                                                         <br />
                                                         <div>
-                                                            <Checkbox checked={agreeWithTerms} onChange={(e) => setAgreeWithTerms(e.target.checked)} value="secondary" color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} /> 
+                                                            <Checkbox checked={agreeWithTerms} onChange={(e) => setAgreeWithTerms(e.target.checked)} value="secondary" color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} />
                                                             *I have read and agree with the &nbsp;&nbsp;
 
                                                             <Button href={TermsAndConditions} variant="contained" color="primary" target="_blank"> Terms & Conditions </Button>
