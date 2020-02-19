@@ -89,7 +89,11 @@ export default () => (
               <p className="mt-4">
                 Labor Day Weekend <br />
                 Columbus Day Weekend <br />
-                <br /><br /><br /><br /><br />
+                &nbsp;<br />
+                &nbsp;<br />
+                &nbsp;<br />
+                &nbsp;<br />
+                &nbsp;<br />
               </p>
             </Card>
           </div>
