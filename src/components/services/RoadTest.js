@@ -27,6 +27,8 @@ import { VIEW } from '../Constants';
 import { Email, BackupEmail } from '../helpers/Emailer';
 import Validate from '../helpers/Validator';
 
+import ToggleBtn from '../forms/ToggleBtn';
+
 const form_steps = ['Student Information', 'Driver Details', 'Package Summary'];
 
 
@@ -110,7 +112,7 @@ export default function RoadTest({ setChild }) {
             "Agree With Price": agreeWithPrice,
             "Agree With Terms": agreeWithTerms
         }
-        
+
         var requiredFields = {
             "First Name": studentFirstName,
             "Last Name": studentLastName,
@@ -217,7 +219,7 @@ export default function RoadTest({ setChild }) {
                                                         <Textbox required value={learnersPermit} id='learnersPermit' label="Learner's Permit Number" onChange={(val) => setLearnersPermit(val)} fullWidth={true} />
 
                                                         <Textbox value={bestTimeToCall} id='bestTimeToCall' label='Best Time to Call' onChange={(val) => setBestTimeToCall(val)} />
-                                                        
+
 
                                                         <Datepicker label='Road Test Date' value={roadTestDate} id='roadTestDate' onChange={(val) => setRoadTestDate(val)} />
 
@@ -225,9 +227,12 @@ export default function RoadTest({ setChild }) {
 
                                                         <Textbox value={roadTestLocation} id='roadTestLocation' label='Road Test Location' onChange={(val) => setRoadTestLocation(val)} />
 
-                                                        <Checkbox checked={roadTestScheduled} onChange={(e) => setRoadTestScheduled(e.target.checked)} value="secondary" color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} />
-                                                            Have you already scheduled a Road Test with the RMV?
-
+                                                        <table>
+                                                            <tr>
+                                                                <td>Have you already scheduled a Road Test with the RMV?</td>
+                                                                <td><ToggleBtn value={roadTestScheduled} setValue={(val) => setRoadTestScheduled(val)} /></td>
+                                                            </tr>
+                                                        </table>
                                                     </div>
 
                                                     );
@@ -244,7 +249,7 @@ export default function RoadTest({ setChild }) {
                                                         </div>
                                                         <br />
                                                         <div>
-                                                            <Checkbox checked={agreeWithTerms} onChange={(e) => setAgreeWithTerms(e.target.checked)} value="secondary" color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} /> 
+                                                            <Checkbox checked={agreeWithTerms} onChange={(e) => setAgreeWithTerms(e.target.checked)} value="secondary" color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} />
                                                             *I have read and agree with the &nbsp;&nbsp;
 
                                                             <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}> Terms & Conditions </Button>                                                            <Popover id={id} open={open} anchorEl={anchorEl} onClose={handleClose}
