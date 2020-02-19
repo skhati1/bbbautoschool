@@ -54,8 +54,19 @@ export default () => (
             <Card className="mb-8">
               <p className="font-semibold text-xl">Winter</p>
               <p className="mt-4">
-                FEB Break <br/>
-                APR Break
+                Black Friday <br />
+                Christmas Break <br />
+                FEB Break <br />
+                <br /><br /><br /><br />
+              </p>
+            </Card>
+          </div>
+          <div className="flex-1 px-3">
+            <Card className="mb-8">
+              <p className="font-semibold text-xl">Spring</p>
+              <p className="mt-4">
+                APR Break<br />
+                <br /><br /><br /><br /><br /><br />
               </p>
             </Card>
           </div>
@@ -63,12 +74,12 @@ export default () => (
             <Card className="mb-8">
               <p className="font-semibold text-xl">Summer </p>
               <p className="mt-4">
-                Memorial Day Weekend Class <br/>
-                4th Monday of JUN <br/>
-                2nd Monday of JUL <br/>
-                4th Monday of JUL <br/>
-                2nd Monday of AUG <br/>
-                4th Monday of AUG <br/>
+                Memorial Day Weekend Class <br />
+                4th Monday of JUN <br />
+                2nd Monday of JUL <br />
+                4th Monday of JUL <br />
+                2nd Monday of AUG <br />
+                4th Monday of AUG 
               </p>
             </Card>
           </div>
@@ -76,10 +87,9 @@ export default () => (
             <Card className="mb-8">
               <p className="font-semibold text-xl">Fall</p>
               <p className="mt-4">
-                Labor Day Weekend <br/>
-                Columbus Day Weekend <br/>
-                Black Friday <br/>
-                Christmas Break <br/>
+                Labor Day Weekend <br />
+                Columbus Day Weekend <br />
+                <br /><br /><br /><br /><br />
               </p>
             </Card>
           </div>
