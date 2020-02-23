@@ -120,8 +120,8 @@ export default function DriversEd({ setChild }) {
             "Agree With Terms": agreeWithTerms
         }
 
-        var [isValid, invalidItems] = Validate(requiredFields)
-        if (isValid) {
+        var invalidItems = Validate(requiredFields)
+        if (invalidItems.length === 0) {
             var condition = await Email(emailForm)
             if (condition) {
                 setFormSubmittedCorrectly(true)

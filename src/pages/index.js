@@ -52,7 +52,7 @@ export default () => (
         <div className="flex flex-col sm:flex-row sm:-mx-3 mt-12">
           <div className="flex-1 px-3">
             <Card className="mb-8">
-              <p className="font-semibold text-xl">Winter</p>
+              <p className="font-semibold text-xl">Winter Class</p>
               <p className="mt-4">
                 Black Friday <br />
                 Christmas Break <br />
@@ -63,7 +63,7 @@ export default () => (
           </div>
           <div className="flex-1 px-3">
             <Card className="mb-8">
-              <p className="font-semibold text-xl">Spring</p>
+              <p className="font-semibold text-xl">Spring Class</p>
               <p className="mt-4">
                 APR Break<br />
                 <br /><br /><br /><br /><br /><br />
@@ -72,9 +72,9 @@ export default () => (
           </div>
           <div className="flex-1 px-3">
             <Card className="mb-8">
-              <p className="font-semibold text-xl">Summer </p>
+              <p className="font-semibold text-xl">Summer Class</p>
               <p className="mt-4">
-                Memorial Day Weekend Class <br />
+                Memorial Day Weekend <br />
                 4th Monday of JUN <br />
                 2nd Monday of JUL <br />
                 4th Monday of JUL <br />
@@ -85,7 +85,7 @@ export default () => (
           </div>
           <div className="flex-1 px-3">
             <Card className="mb-8">
-              <p className="font-semibold text-xl">Fall</p>
+              <p className="font-semibold text-xl">Fall Class</p>
               <p className="mt-4">
                 Labor Day Weekend <br />
                 Columbus Day Weekend <br />
