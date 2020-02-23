@@ -32,7 +32,6 @@ export default function ServicesMain() {
     const [view, setView] = useState(VIEW.NONE)
 
     const setChild = (flag, view) => {
-        console.log('changing view to ', view)
         setShowDialog(flag)
         setView(view)
     }

@@ -6,11 +6,9 @@ export default function Validate(dictionary) {
         }
         if(index.startsWith("Agree")) {
             if(dictionary[index] === false){
-                console.log("invalid for" + index);
                 invalidItems.push(index)
             }
         }
     }
-    console.log(invalidItems);
     return invalidItems;
 }

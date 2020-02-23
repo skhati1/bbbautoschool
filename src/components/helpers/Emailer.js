@@ -47,8 +47,6 @@ const end_template = `
 `
 
 export async function Email(dictionary) {
-  console.log(dictionary)
-
   const generateHtml = (dictionary) => {
     var result = start_template
     Object.keys(dictionary).forEach(function (key) {
@@ -102,11 +100,7 @@ export async function BackupEmail(dictionary, [previousStatus, reason]) {
   var userId = 'user_YMFMqxEjBDsnnfW6RbVgb';
 
   var sendAction = "";
-  try {
-    sendAction = await emailjs.send(service_id, template_id, message, userId)
-  } catch (exception) {
-    console.log(exception);
-  } console.log(sendAction)
+  sendAction = await emailjs.send(service_id, template_id, message, userId)
   return [sendAction.status, sendAction.text]
 }
 
