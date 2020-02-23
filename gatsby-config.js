@@ -1,5 +1,5 @@
 module.exports = {
-  pathPrefix: `/bbbautoschool`,
+  pathPrefix: ``,
   plugins: [
     {
       resolve: `gatsby-theme-codebushi`,
