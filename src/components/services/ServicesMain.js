@@ -16,6 +16,22 @@ import RoadTest from './RoadTest'
 import { makeStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import CloseIcon from '@material-ui/icons/Close';
+import Slide from '@material-ui/core/Slide';
+import { PDFtoIMG } from 'react-pdf-to-image';
+import file from '../../data/pricing.pdf';
+
+import Button from '@material-ui/core/Button';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
+
 const useStyles = makeStyles(theme => ({
     container: {
         display: 'flex',
@@ -25,9 +41,39 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(1),
         minWidth: 120,
     },
+    appBar: {
+        position: 'relative',
+    },
+    title: {
+        marginLeft: theme.spacing(2),
+        flex: 1,
+    },
 }));
 
 export default function ServicesMain() {
+
+    const [open, setOpen] = React.useState(false);
+    const [scroll, setScroll] = React.useState('paper');
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const descriptionElementRef = React.useRef(null);
+    React.useEffect(() => {
+        if (open) {
+            const { current: descriptionElement } = descriptionElementRef;
+            if (descriptionElement !== null) {
+                descriptionElement.focus();
+            }
+        }
+    }, [open]);
+
+
     const [showDialog, setShowDialog] = useState(false)
     const [view, setView] = useState(VIEW.NONE)
 
@@ -35,14 +81,14 @@ export default function ServicesMain() {
         setShowDialog(flag)
         setView(view)
     }
-    
+
     let component = null;
     switch (view) {
         case VIEW.DRIVERS_ED:
-            component = <DriversEd setChild={setChild}/>;
+            component = <DriversEd setChild={setChild} />;
             break;
         case VIEW.PRIVATE:
-            component = <Private setChild={setChild}/>;
+            component = <Private setChild={setChild} />;
             break;
         case VIEW.ROAD_TEST:
             component = <RoadTest setChild={setChild} />
@@ -70,7 +116,7 @@ export default function ServicesMain() {
                             <li>2 Hours Parent Class</li>
                         </ul>
                         <div className="mt-8 md:mt-12">
-                            <a href={Pricing} target="_blank">Pricing &nbsp;&nbsp;&nbsp;</a>
+                            <Button color="primary" onClick={handleClickOpen}>Pricing</Button>
                             <button onClick={() => setChild(true, VIEW.DRIVERS_ED)} type="button" className={`py-4 px-12 bg-primary hover:bg-primary-darker rounded text-white`}>
                                 Register Now
                             </button>
@@ -92,7 +138,7 @@ export default function ServicesMain() {
                             <li>12 Hours Driving Lessons</li>
                         </ul>
                         <div className="mt-8 md:mt-12">
-                            <a href={Pricing} target="_blank">Pricing &nbsp;&nbsp;&nbsp;</a>
+                            <Button color="primary" onClick={handleClickOpen}>Pricing</Button>
                             <button onClick={() => setChild(true, VIEW.PRIVATE)} type="button" className={`py-4 px-12 bg-primary hover:bg-primary-darker rounded text-white`}>
                                 Register Now
                             </button>
@@ -112,7 +158,7 @@ export default function ServicesMain() {
                             <li>Road Test at RMV</li>
                         </ul>
                         <p className="mt-8 md:mt-12">
-                            <a href={Pricing} target="_blank">Pricing &nbsp;&nbsp;&nbsp;</a>
+                            <Button color="primary" onClick={handleClickOpen}>Pricing</Button>
                             <button onClick={() => setChild(true, VIEW.ROAD_TEST)} type="button"
                                 className={`py-4 px-12 bg-primary hover:bg-primary-darker rounded text-white`}>
                                 Register Now
@@ -123,5 +169,29 @@ export default function ServicesMain() {
             }
             secondarySlot={<img src={Image3} alt="Private Lesson Sample Image" />}
         />
+
+
+        <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+            <AppBar>
+                <Toolbar>
+                    <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+                        <CloseIcon />
+                    </IconButton>
+                    <Typography variant="h6">
+                        Pricing
+                    </Typography>
+                </Toolbar>
+            </AppBar>
+            <div>
+                <PDFtoIMG file={file}>
+                    {({ pages }) => {
+                        if (!pages.length) return 'Loading...';
+                        return pages.map((page, index) =>
+                            <img key={index} src={page} />
+                        );
+                    }}
+                </PDFtoIMG>
+            </div>
+        </Dialog>
     </div>
 }
