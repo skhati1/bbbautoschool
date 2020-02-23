@@ -57,6 +57,21 @@ const privatePackageOptions = {
     "12 Hours Driving Instruction": "$540.00"
 }
 
+const classAttendingOptions = {
+    "Black Friday": "Black Friday",
+    "Christmas Break": "Christmas Break",
+    "February Break": "February Break",
+    "April Break": "April Break",
+    "Memorial Day Weekend": "Memorial Day Weekend",
+    "4th Monday of June": "4th Monday of June",
+    "2nd Monday of July": "2nd Monday of July",
+    "4th Monday of July": "4th Monday of July",
+    "2nd Monday of August": "2nd Monday of August",
+    "4th Monday of August": "4th Monday of August",
+    "Labor Day Weekend": "Labor Day Weekend",
+    "Columbus Day Weekend": "Columbus Day Weekend"
+}
+
 export default function DriversEd({ setChild }) {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
@@ -100,7 +115,7 @@ export default function DriversEd({ setChild }) {
             "Parent Email": parentEmail,
             "Parent Phone": parentPhone,
             "Home Phone": homePhone,
-            "Starting Date": startingDate,
+            "Class Attending": classAttending[0],
             "Package": "Driver's ED " + privatePackage[0] + " : " + privatePackage[1],
             "Agree With Price": agreeWithPrice,
             "Agree With Terms": agreeWithTerms
@@ -166,7 +181,9 @@ export default function DriversEd({ setChild }) {
     const [agreeWithTerms, setAgreeWithTerms] = useState(false)
 
     const [privatePackage, setPrivatePackage] = useState(['', ''])
-    const [startingDate, setStartingDate] = useState('')
+
+    const [classAttending, setClassAttending] = useState(['', ''])
+
     const [comments, setComments] = useState('')
 
     return <div>
@@ -222,8 +239,10 @@ export default function DriversEd({ setChild }) {
 
                                                         <PhoneNumberTextBox value={homePhone} id='homePhone' label='Home Phone' onChange={val => setHomePhone(val)} />
 
-                                                        <Datepicker label='Starting Date' value={startingDate} id='startingDate' onChange={val => setStartingDate(val)} />
-
+                                                        <div>
+                                                            <span style={{ paddingLeft: "1vh" }}>Class Attending: </span>
+                                                            <DropDown required options={classAttendingOptions} value={classAttending} id='classAttending' label='Class Attending' onChange={val => setClassAttending(val)}></DropDown><br />
+                                                        </div><br />
                                                         <Textbox value={comments} id='comments' label='Comments' onChange={val => setComments(val)} />
 
 
