@@ -27,15 +27,15 @@ export default () => (
           <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-none">
             BBB Auto School
           </h1>
-          <h4>
-            RMV Certified Professional Driving School<br />
+            RMV Certified Professional Driving School<br /><br />
+          <h1 className="text-2xl lg:text-3xl xl:text-3xl font-bold leading-none">
             Take Your Road Test in 2-3 Weeks!
-          </h4>
+          </h1><br/>
           <a href="tel:5088803333"><Button size="lg">Call us at (508) 880-3333</Button></a>
           <p className="mt-4 text-gray-600 underline">Announcements</p>
           <p className="text-l lg:text-1xl mt-5 font-light">
             ‣ Enrollment is Open For Driver's ED Program.<br />
-            ‣ Seats are Limited! Register online, via phone, or via email. <br />
+            ‣ Seats are Limited! Register online or by visiting our office!<br />
             ‣ Parent Classes Offered Second Monday of every month 6PM - 8PM. <br />
           </p>
           <br />
