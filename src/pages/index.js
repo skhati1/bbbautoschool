@@ -152,7 +152,7 @@ export default () => (
             </p><br />
             <p>
               Driving Hours<br />
-              Monday - Friday 11 AM - 7 PM <br />
+              Monday - Saturday 11 AM - 7 PM <br />
             </p>
           </div>
         } />

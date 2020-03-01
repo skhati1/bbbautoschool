@@ -60,6 +60,7 @@ export async function Email(dictionary) {
     "first_name": dictionary["First Name"],
     "last_name": dictionary["Last Name"],
     "student_email": dictionary["Student Email"],
+    "parent_email": dictionary["Parent Email"],
     "message": generateHtml(dictionary)
   }
 

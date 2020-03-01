@@ -84,6 +84,7 @@ export default function Private({ setChild }) {
             "City": city,
             "Zip Code": zipCode,
             "Student Email": studentEmail,
+            "Parent Email": "",
             "Student Cell Phone": studentCellPhone,
             "Home Phone": homePhone,
             "Best Time to Call": bestTimeToCall,
