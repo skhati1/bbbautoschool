@@ -56,6 +56,7 @@ export default function ServicesMain() {
     const [scroll, setScroll] = React.useState('paper');
 
     const handleClickOpen = () => {
+
         setOpen(true);
     };
 
@@ -116,7 +117,7 @@ export default function ServicesMain() {
                             <li>2 Hours Parent Class</li>
                         </ul>
                         <div className="mt-8 md:mt-12">
-                            <Button color="primary" onClick={handleClickOpen}>Pricing</Button>
+                            <Button color="primary" href={file} target="_blank">Pricing</Button>
                             <button onClick={() => setChild(true, VIEW.DRIVERS_ED)} type="button" className={`py-4 px-12 bg-primary hover:bg-primary-darker rounded text-white`}>
                                 Register Now
                             </button>
@@ -138,7 +139,7 @@ export default function ServicesMain() {
                             <li>12 Hours Driving Lessons</li>
                         </ul>
                         <div className="mt-8 md:mt-12">
-                            <Button color="primary" onClick={handleClickOpen}>Pricing</Button>
+                            <Button color="primary" href={file} target="_blank">Pricing</Button>
                             <button onClick={() => setChild(true, VIEW.PRIVATE)} type="button" className={`py-4 px-12 bg-primary hover:bg-primary-darker rounded text-white`}>
                                 Register Now
                             </button>
@@ -158,7 +159,7 @@ export default function ServicesMain() {
                             <li>Road Test at RMV</li>
                         </ul>
                         <p className="mt-8 md:mt-12">
-                            <Button color="primary" onClick={handleClickOpen}>Pricing</Button>
+                            <Button color="primary" href={file} target="_blank">Pricing</Button>
                             <button onClick={() => setChild(true, VIEW.ROAD_TEST)} type="button"
                                 className={`py-4 px-12 bg-primary hover:bg-primary-darker rounded text-white`}>
                                 Register Now
