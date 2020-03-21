@@ -72,32 +72,11 @@ export default function Links() {
           ))
         }
         <div>
-          <Button color="primary" onClick={handleClickOpen('common')}>Common Reasons for Road Test Failures</Button>
+        <Button color="primary" href={CommonReasons}>Common Reasons for Road Test Failures</Button>
           <br />
-          <Button color="primary" onClick={handleClickOpen('jol')}>JOL Fine and Penalty</Button>
+          <Button color="primary" href={JOL}>JOL Fine and Penalty</Button>
 
-          <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-            <AppBar>
-              <Toolbar>
-                <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
-                  <CloseIcon />
-                </IconButton>
-                <Typography variant="h6">
-                  {imageToShow === 'common' && "Common Reasons for Road Test Failure"}
-                  {imageToShow === 'jol' && "JOL Penalty and Fine"}
-                </Typography>
-              </Toolbar>
-            </AppBar>
-            <div>
-              {imageToShow === 'common' &&
-                <img src={CommonReasons} alt='Common Reasons for Road Test Failure' vspace='70' width='70%' />
-              }
 
-              {imageToShow === 'jol' &&
-                <img src={JOL} alt='JOL Penalty and Fine' vspace='70' width='70%' />
-              }
-            </div>
-          </Dialog>
         </div>
 
       </tbody>

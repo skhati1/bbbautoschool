@@ -18,19 +18,25 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Alert from '@material-ui/lab/Alert';
 
 export default () => (
   <Layout>
+
+    <Alert severity="error">
+      Due to the ongoing Corona Virus pandemic, all driving classes have been postponed until further notice. Thank you for your cooperation!
+  </Alert>
     <section className="pt-20 md:pt-20">
       <div className="container mx-auto px-8 lg:flex">
+
         <div className="text-center lg:text-left lg:w-1/2">
           <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-none">
             BBB Auto School
           </h1>
-            RMV Certified Professional Driving School<br /><br />
+          RMV Certified Professional Driving School<br /><br />
           <h1 className="text-2xl lg:text-3xl xl:text-3xl font-bold leading-none">
             Take Your Road Test in 2-3 Weeks!
-          </h1><br/>
+          </h1><br />
           <a href="tel:5088803333"><Button size="lg">Call us at (508) 880-3333</Button></a>
           <p className="mt-4 text-gray-600 underline">Announcements</p>
           <p className="text-l lg:text-1xl mt-5 font-light">
@@ -79,7 +85,7 @@ export default () => (
                 2nd Monday of JUL <br />
                 4th Monday of JUL <br />
                 2nd Monday of AUG <br />
-                4th Monday of AUG 
+                4th Monday of AUG
               </p>
             </Card>
           </div>
