@@ -22,10 +22,13 @@ import Alert from '@material-ui/lab/Alert';
 
 export default () => (
   <Layout>
-
-    <Alert severity="error">
-      Due to the ongoing Corona Virus pandemic, all driving classes have been postponed until further notice. Thank you for your cooperation!
-  </Alert>
+    <div classname="container">
+      <Alert severity="error">
+        <p style={{ fontSize: "22px"}}>
+          Due to the ongoing Corona Virus pandemic, all in-person driving classes have been postponed. We are now offering <a href="#" class="alert-link">Online Driver's ED Classes</a> as an alternative. Please call us for more information!
+        </p>
+      </Alert>
+    </div>
     <section className="pt-20 md:pt-20">
       <div className="container mx-auto px-8 lg:flex">
 
@@ -124,7 +127,7 @@ export default () => (
                 <TableBody>
                   <TableRow>
                     <TableCell component="th" scope="row">Address </TableCell>
-                    <TableCell><a target="_blank" href="https://goo.gl/maps/oXSNSeTsFK12">106 Weir St, Taunton, MA 02780</a></TableCell>
+                    <TableCell><a target="_blank" href="https://goo.gl/maps/52WcTnfLu8KdNUBM9">35 Main Street, Taunton MA 02780</a></TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell component="th" scope="row">Phone </TableCell>
