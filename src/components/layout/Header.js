@@ -31,6 +31,10 @@ export default class Header extends React.Component {
               <img src={Logo} alt="BBB Auto School Logo"></img>
             </div>
             BBB Auto School
+          </div>
+          <div className="text-l">
+            <br />
+            (508)-880-3333 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 35 Main Street, Taunton, MA 
         </div>
         </a>
         {sublinks}
