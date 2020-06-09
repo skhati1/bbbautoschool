@@ -23,9 +23,9 @@ import Alert from '@material-ui/lab/Alert';
 export default () => (
   <Layout>
     <div classname="container">
-      <Alert severity="error">
-        <p style={{ fontSize: "22px"}}>
-          Due to the ongoing Corona Virus pandemic, all in-person driving classes have been postponed. We are now offering <a href="#" class="alert-link">Online Driver's ED Classes</a> as an alternative. Please call us for more information!
+      <Alert severity="info">
+        <p style={{ fontSize: "15px"}}>
+          We are now resuming in-person driving lessons. Please register online or call us to reserve a spot!
         </p>
       </Alert>
     </div>
@@ -38,7 +38,7 @@ export default () => (
           </h1>
           RMV Certified Professional Driving School<br /><br />
           <h1 className="text-2xl lg:text-3xl xl:text-3xl font-bold leading-none">
-            Take Your Road Test in 2-3 Weeks!
+            Call us to schedule your Road Test today!
           </h1><br />
           <a href="tel:5088803333"><Button size="lg">Call us at (508) 880-3333</Button></a>
           <p className="mt-4 text-gray-600 underline">Announcements</p>
