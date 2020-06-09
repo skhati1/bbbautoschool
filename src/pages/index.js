@@ -25,7 +25,7 @@ export default () => (
     <div classname="container">
       <Alert severity="info">
         <p style={{ fontSize: "15px"}}>
-          We are now resuming in-person driving lessons. Please register online or call us to reserve a spot!
+          We are now resuming in-person classes. Please register online or call us to reserve a spot!
         </p>
       </Alert>
     </div>
