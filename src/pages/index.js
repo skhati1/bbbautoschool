@@ -10,7 +10,7 @@ import Layout from '../components/layout/Layout';
 import SplitSection from '../components/SplitSection';
 
 import ServicesMain from '../components/services/ServicesMain';
-import HeroImage from '../images/showcase.jpg';
+import HeroImage from '../images/classroom.jpg';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -24,8 +24,8 @@ export default () => (
   <Layout>
     <div classname="container">
       <Alert severity="info">
-        <p style={{ fontSize: "15px"}}>
-          We are now resuming in-person classes. Please register online or call us to reserve a spot!
+        <p style={{ fontSize: "20px"}}>
+          We are now resuming in-person classes following the proper RMV guidelines with proper social distancing. Please register online or call us to reserve a spot!
         </p>
       </Alert>
     </div>
