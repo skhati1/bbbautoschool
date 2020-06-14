@@ -5,9 +5,9 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "develop": "gatsby develop",
-    "build": "gatsby build",
-    "deploy": "gatsby build && echo \"bbbautoschool.com\" > public/CNAME && gh-pages -d public -r https://github.com/skhati1/bbbautoschool.git"
+    "develop": "gatsby develop && echo bbbautoschool.com > public/CNAME",
+    "build": "gatsby build && echo bbbautoschool.com > public/CNAME",
+    "deploy": "gatsby build && echo bbbautoschool.com > public/CNAME && gh-pages -d public -r https://github.com/skhati1/bbbautoschool.git"
   },
   "dependencies": {
     "@date-io/date-fns": "^1.3.13",
