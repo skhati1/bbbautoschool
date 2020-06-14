@@ -1,6 +1,6 @@
 import React from 'react';
-import Registration from '../../data/registration.pdf';
 import Policies from '../../data/policies.pdf';
+import {Link} from 'gatsby';
 
 const Footer = () => (
   <footer className="container mx-auto py-16 px-3 mb-8 text-gray-800 text-center">
@@ -16,7 +16,7 @@ const Footer = () => (
             <a href={Policies}>Terms &amp; Conditions</a>
           </li>
           <li>
-            <a href={Registration}>Registration Form</a>
+          < Link to="/registration" target="_blank">Registration Form</Link> &nbsp;&nbsp;  
           </li>
         </ul>
       </div>

@@ -1,0 +1,14 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-bbbautoschool",
+      "appliesTo": "/",
+      "type": "launch",
+      "commmand": "gatsby",
+      "args": [
+        "develop"
+      ]
+    }
+  ]
+}

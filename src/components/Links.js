@@ -71,14 +71,13 @@ export default function Links() {
             </tr>
           ))
         }
-        <div>
-        <Button color="primary" href={CommonReasons}>Common Reasons for Road Test Failures</Button>
-          <br />
-          <Button color="primary" href={JOL}>JOL Fine and Penalty</Button>
+        <tr key="CommonReasons">
+          <td><a href={CommonReasons} target="_blank">Common Reasons for Road Test Failures</a></td>
+        </tr>
 
-
-        </div>
-
+        <tr key="JOL">
+          <td><a href={JOL} target="_blank">JOL Fine and Penalty</a></td>
+        </tr>
       </tbody>
     </table>
   </div>

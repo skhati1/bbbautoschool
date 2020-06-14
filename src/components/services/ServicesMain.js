@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-import Pricing from '../../data/pricing.pdf'
 import Image1 from '../../images/image1.jpg'
 import Image2 from '../../images/image2.jpg'
 import Image3 from '../../images/image3.jpg'
@@ -13,6 +12,7 @@ import Private from './Private'
 import DriversEd from './DriversEd'
 import RoadTest from './RoadTest'
 
+import { Link } from 'gatsby';
 import { makeStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 
@@ -24,7 +24,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import { PDFtoIMG } from 'react-pdf-to-image';
 import file from '../../data/pricing.pdf';
-
 import Button from '@material-ui/core/Button';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -117,7 +116,7 @@ export default function ServicesMain() {
                             <li>2 Hours Parent Class</li>
                         </ul>
                         <div className="mt-8 md:mt-12">
-                            <Button color="primary" href={file} target="_blank">Pricing</Button>
+                            <Link to="/pricing" target="_blank">Pricing</Link> &nbsp;&nbsp;                                
                             <button onClick={() => setChild(true, VIEW.DRIVERS_ED)} type="button" className={`py-4 px-12 bg-primary hover:bg-primary-darker rounded text-white`}>
                                 Register Now
                             </button>
@@ -139,7 +138,7 @@ export default function ServicesMain() {
                             <li>12 Hours Driving Lessons</li>
                         </ul>
                         <div className="mt-8 md:mt-12">
-                            <Button color="primary" href={file} target="_blank">Pricing</Button>
+                            <Link to="/pricing" target="_blank">Pricing</Link> &nbsp;&nbsp;                                
                             <button onClick={() => setChild(true, VIEW.PRIVATE)} type="button" className={`py-4 px-12 bg-primary hover:bg-primary-darker rounded text-white`}>
                                 Register Now
                             </button>
@@ -159,7 +158,7 @@ export default function ServicesMain() {
                             <li>Road Test at RMV</li>
                         </ul>
                         <p className="mt-8 md:mt-12">
-                            <Button color="primary" href={file} target="_blank">Pricing</Button>
+                            <Link to="/pricing" target="_blank">Pricing</Link> &nbsp;&nbsp;                                
                             <button onClick={() => setChild(true, VIEW.ROAD_TEST)} type="button"
                                 className={`py-4 px-12 bg-primary hover:bg-primary-darker rounded text-white`}>
                                 Register Now
