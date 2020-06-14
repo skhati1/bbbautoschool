@@ -22,26 +22,39 @@ export default class Pricing extends React.Component {
             objectFit: 'contain',
             margin: '0 auto'
         }
-        const divRightPad = {
-            paddingRight: '210px'
+        const inputStyle = {
+            border: '0',
+            outline: '0',
+            background: 'transparent',
+            borderBottom: '2px solid black',
+            marginBottom: '5px'
         }
-        const listStyle = {
-            listStyleType: 'none'
+        const divRightPad = {
+           marginRight: '10px'
+        }
+        const divLeftPad = {
+           marginLeft: '75px',
+           fontWeight: 'bold'
         }
         return (
-            <div style={alignText}>
-                <br />
-                <img src={logo} style={imageStyle} />
-                <h4 style={boldFont}>
-                    Taunton, MA 02780
+            <div style={body}>
+                <div style={alignText}>
+                    <div style={boldFont}>
+                        <br />
+                        <h4>  <img src={logo} style={imageStyle} />
+                            <br />
+                            Taunton, MA 02780
                             <br />
                             Tel: (508)-880-3333
-                            <br /><br />
+                            <br style={{ marginBottom: '5px' }} />
                             Pricing Information 
-                            <br /><br />
                         </h4>
+                    </div>
+                </div>
+                <br /><br />
+                <div style={{ marginTop: '5px' }} >
                 <table>
-                    <tr>
+                    <tr style={alignText}>
                         <td>
                             <div style={divRightPad}>
                                 <h4>Driver's ED Full Program</h4> <br />
@@ -52,31 +65,31 @@ export default class Pricing extends React.Component {
                             </div>
                         </td>
                         <td>
-                            <h3 style={boldFont}>$699.00</h3>
+                            <h3 style={divLeftPad}>$699.00</h3>
                         </td>
                     </tr>
                     <tr><td>&nbsp;</td></tr>
-                    <tr>
+                    <tr style={alignText}>
                         <td style={divRightPad}>30 Hours of Classroom Lessons</td>
-                        <td><h3 style={boldFont}>$199.00</h3></td>
+                        <td><h3 style={divLeftPad}>$199.00</h3></td>
                     </tr>
                     <tr><td>&nbsp;</td></tr>
-                    <tr>
+                    <tr style={alignText}>
                         <td style={divRightPad}>12 Hours of Driving Instructions</td>
-                        <td><h3 style={boldFont}>$540.00</h3></td>
+                        <td><h3 style={divLeftPad}>$540.00</h3></td>
                     </tr>
                     <tr><td>&nbsp;</td></tr>
-                    <tr>
+                    <tr style={alignText}>
                         <td style={divRightPad}>6 Hours of Driving Lessons</td>
-                        <td><h3 style={boldFont}>$270.00</h3></td>
+                        <td><h3 style={divLeftPad}>$270.00</h3></td>
                     </tr>
                     <tr><td>&nbsp;</td></tr>
-                    <tr>
+                    <tr style={alignText}>
                         <td style={divRightPad}>1 Hour Lesson</td>
-                        <td><h3 style={boldFont}>$50.00</h3></td>
+                        <td><h3 style={divLeftPad}>$50.00</h3></td>
                     </tr>
                     <tr><td>&nbsp;</td></tr>
-                    <tr>
+                    <tr style={alignText}>
                         <td>
                             <div style={divRightPad}>
                                 Road Test Sponsorship Fee
@@ -84,11 +97,12 @@ export default class Pricing extends React.Component {
                             </div>
                         </td>
                         <td>
-                            <h3 style={boldFont}>$120.00</h3>
+                            <h3 style={divLeftPad}>$120.00</h3>
                         </td>
                     </tr>
                     <tr><td>&nbsp;</td></tr>
                 </table>
+                </div>
             </div>
         );
     }
