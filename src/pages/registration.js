@@ -146,7 +146,6 @@ export default class Pricing extends React.Component {
                             Office Use only: Date Paid &nbsp;<input style={inputStyle} type="text" />
                             &nbsp; Amount Paid: <input style={inputStyle} type="text" />
                     </div>
-                    <br /><br />
                     <br />
                 </div>
             </div>
