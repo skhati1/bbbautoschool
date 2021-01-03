@@ -25,7 +25,7 @@ export default () => (
     <div classname="container">
       <Alert severity="info">
         <p style={{ fontSize: "20px"}}>
-          We are now resuming in-person classes following the proper RMV guidelines with social distancing. Please register online or call us to reserve a spot!
+        We are now doing Driver's Ed Class and Parent Class Online! Please register online or call us to reserve a spot! 
         </p>
       </Alert>
     </div>
@@ -45,7 +45,7 @@ export default () => (
           <p className="text-l lg:text-1xl mt-5 font-light">
             ‣ Enrollment is Open For Driver's ED Program.<br />
             ‣ Seats are Limited! Register online or by visiting our office!<br />
-            ‣ Parent Classes Offered Second Monday of every month 5:30 PM - 7:30 PM. <br />
+            ‣ Parent Classes Offered Second Monday of every month 5:30 PM - 7:30 PM <em>online</em>. <br />
           </p>
           <br />
         </div>
