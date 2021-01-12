@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "develop": "gatsby develop && echo bbbautoschool.com > public/CNAME",
+    "start": "gatsby develop && echo bbbautoschool.com > public/CNAME",
     "build": "gatsby build && echo bbbautoschool.com > public/CNAME",
     "deploy": "gatsby build && echo bbbautoschool.com > public/CNAME && gh-pages -d public -r https://github.com/skhati1/bbbautoschool.git"
   },
@@ -15,11 +15,11 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@material-ui/pickers": "^3.2.10",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "date-fns": "^2.14.0",
     "emailjs-com": "^2.4.1",
     "fetch": "^1.1.0",
-    "gatsby": "^2.19.34",
+    "gatsby": "^2.13.57",
     "gatsby-plugin-react-helmet": "^3.3.4",
     "gatsby-plugin-s3": "^0.3.3",
     "gatsby-theme-codebushi": "1.0.0",

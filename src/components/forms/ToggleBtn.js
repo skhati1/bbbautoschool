@@ -28,15 +28,9 @@ export default function ToggleButtons(props) {
                         value={props.value}
                         exclusive
                         onChange={handleAlignment}
-                        aria-label="Toggle Button Yes or No"
-                    >
-                        <ToggleButton value={false} aria-label="no">
-                            No
-            </ToggleButton>
-                        <ToggleButton value={true} aria-label="yes">
-                            Yes
-            </ToggleButton>
-
+                        aria-label="Toggle Button Yes or No">
+                            <ToggleButton value={false} aria-label="no">No</ToggleButton>
+                            <ToggleButton value={true} aria-label="yes">Yes</ToggleButton>
                     </ToggleButtonGroup>
                 </div>
             </Grid>

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Image1 from '../../images/image1.jpg'
 import Image2 from '../../images/image2.jpg'
 import Image3 from '../../images/image3.jpg'
+import Classroom2 from '../../images/classroom2.jpg'
 
 import SplitSection from '../../components/SplitSection'
 
@@ -11,6 +12,7 @@ import { VIEW } from '../Constants';
 import Private from './Private'
 import DriversEd from './DriversEd'
 import RoadTest from './RoadTest'
+import ParentRegistration from './ParentRegistration'
 
 import { Link } from 'gatsby';
 import { makeStyles } from '@material-ui/core/styles';
@@ -55,7 +57,6 @@ export default function ServicesMain() {
     const [scroll, setScroll] = React.useState('paper');
 
     const handleClickOpen = () => {
-
         setOpen(true);
     };
 
@@ -93,8 +94,11 @@ export default function ServicesMain() {
         case VIEW.ROAD_TEST:
             component = <RoadTest setChild={setChild} />
             break;
+        case VIEW.PARENT:
+            component = <ParentRegistration setChild={setChild} />
+            break;
         default:
-            component = <div>lolidk</div>;
+            component = <div>Error. Please try again later!</div>;
     }
 
     return <div>
@@ -151,6 +155,27 @@ export default function ServicesMain() {
         <SplitSection
             primarySlot={
                 <div className="lg:pr-32 xl:pr-48">
+                    <h3 className="text-3xl font-semibold leading-tight">Parent Class</h3>
+                    <div className="mt-8 text-xl font-light leading-relaxed">
+                        <ul>
+                            <li>Offered Second Monday of Every Month</li>
+                            <li>5:30 PM - 7:30 PM</li>
+                            <li>Offered Online</li>
+                        </ul>
+                        <div className="mt-8 md:mt-12">                             
+                            <button onClick={() => setChild(true, VIEW.PARENT)} type="button" className={`py-4 px-12 bg-primary hover:bg-primary-darker rounded text-white`}>
+                                Register Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+            secondarySlot={<img src={Classroom2} alt="Private Lesson Sample Image" />}
+        />
+        <SplitSection
+            reverseOrder
+            primarySlot={
+                <div className="lg:pl-32 xl:pl-48">
                     <h3 className="text-3xl font-semibold leading-tight">Road Test Sponsorship</h3>
                     <div className="mt-8 text-xl font-light leading-relaxed">
                         <ul>

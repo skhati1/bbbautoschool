@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '../components/Button';
 import Card from '../components/Card';
 
@@ -20,9 +20,10 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Alert from '@material-ui/lab/Alert';
 
-export default () => (
-  <Layout>
-    <div classname="container">
+export default function Index() {
+  return <div>
+    <Layout>
+    <div className="container">
       <Alert severity="info">
         <p style={{ fontSize: "20px"}}>
         We are now doing Driver's Ed Class and Parent Class Online! Please register online or call us to reserve a spot! 
@@ -181,4 +182,5 @@ export default () => (
       </div>
     </section>
   </Layout>
-);
+  </div>
+}

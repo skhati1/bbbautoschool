@@ -22,7 +22,7 @@ import PhoneNumberTextBox from '../forms/PhoneNumberTextBox'
 import { Alert, AlertTitle } from '@material-ui/lab';
 
 import { VIEW } from '../Constants';
-import { Email, BackupEmail } from '../helpers/Emailer';
+import { SendDrivingServiceEmail, SendDrivingServiceBackupEmail } from '../helpers/Emailer';
 import Validate from '../helpers/Validator';
 
 const form_steps = ['Student Information', 'Driver Details', 'Package Summary'];
@@ -114,11 +114,11 @@ export default function Private({ setChild }) {
         
         var invalidItems = Validate(requiredFields)
         if (invalidItems.length === 0) {
-            var condition = await Email(emailForm)
+            var condition = await SendDrivingServiceEmail(emailForm)
             if (condition) {
                 setFormSubmittedCorrectly(true)
             } else {
-                var backupCondition = await BackupEmail(emailForm, condition)
+                var backupCondition = await SendDrivingServiceBackupEmail(emailForm, condition)
                 if (backupCondition) {
                     setFormSubmittedCorrectly(true)
                 }

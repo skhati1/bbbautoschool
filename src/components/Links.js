@@ -66,7 +66,7 @@ export default function Links() {
       <tbody>
         {links.map(item =>
           (
-            <tr key={item.link}>
+            <tr key={item.text}>
               <td><a href={item.link} target="_blank">{item.text}</a></td>
             </tr>
           ))

@@ -15,8 +15,16 @@ export default function Dropdown(props) {
         }
     }
 
-    const options = Object.keys(props.options).map(kvp =>
-        <MenuItem value={props.options[kvp]}>{kvp}</MenuItem>
+    const options = Object.keys(props.options).map(kvp => 
+        <MenuItem value={props.options[kvp]}>{kvp}</MenuItem> 
     );
-    return <Select value={props.value[1]} onChange={(e) => reportChange(e)}>{options}</Select>
+
+    return <Select 
+        value={props.value[1]} 
+        label={props.label}
+        style={{ margin: 8}}
+        variant="outlined"
+        onChange={(e) => reportChange(e)}>
+            {options}
+        </Select>
 }
